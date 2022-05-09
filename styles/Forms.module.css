@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 400px;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: var(--bg);
+  color: var(--font);
+  padding-top: 3rem;
+}
+
+.rowForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.rowForm input {
+  width: auto;
+}
+
+.btn {
+  width: 100px;
+  border-radius: 30px;
+  background-color: var(--bg);
+  color: var(--font);
+  border: 2px inset;
+}
+.btn:hover {
+  font-weight: bold;
+  color: red;
+  border: 2px outset;
+}
