@@ -37,7 +37,7 @@ export default function Navbar() {
             <a href="/Doctors">Doctors</a>
           </li>
           <li>
-            <a href="/1">About Us</a>
+            <a href="/About">About Us</a>
           </li>
           <li>
             {/* <a alt="Change Theme" onClick={() => changeTheme()}>
@@ -59,7 +59,9 @@ export default function Navbar() {
             </div>
           </li>
         </ul>
-        <h1 className="logo">Medikeeper</h1>
+        <h1 className="logo">
+          <a href="/1">Medikeeper</a>
+        </h1>
       </div>
     </nav>
   );
