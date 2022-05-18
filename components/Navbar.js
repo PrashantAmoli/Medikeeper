@@ -1,7 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Navbar() {
   const checked = useRef();
+  const [Theme, setTheme] = useState({
+    font: '',
+    bg: '',
+  });
 
   const changeTheme = () => {
     const font = getComputedStyle(document.documentElement).getPropertyValue(
@@ -10,6 +14,10 @@ export default function Navbar() {
     const bg = getComputedStyle(document.documentElement).getPropertyValue(
       '--bg'
     );
+    setTheme({
+      font: bg,
+      bg: font,
+    });
     document.documentElement.style.setProperty('--font', bg);
     document.documentElement.style.setProperty('--bg', font);
   };
