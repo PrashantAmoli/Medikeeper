@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 
-export default function RegistrationForm() {
+export default function PatientRegistrationForm() {
   const [Data, setData] = useState({
     patientsID: '',
     patientsName: '',

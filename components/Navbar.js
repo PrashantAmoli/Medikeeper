@@ -1,11 +1,27 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function Navbar() {
   const checked = useRef();
+  const stateRef = useRef({});
   const [Theme, setTheme] = useState({
     font: '',
     bg: '',
   });
+
+  stateRef.current = Theme;
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.documentElement.style.setProperty(
+        '--font',
+        stateRef.current.font
+      );
+      document.documentElement.style.setProperty('--bg', stateRef.current.bg);
+      console.log(`use effect ran ${JSON.stringify(Theme)}`);
+    }, 4000);
+    // document.documentElement.style.setProperty('--font', Theme.font);
+    // document.documentElement.style.setProperty('--bg', Theme.bg);
+  }, [Theme]);
 
   const changeTheme = () => {
     const font = getComputedStyle(document.documentElement).getPropertyValue(
@@ -14,12 +30,15 @@ export default function Navbar() {
     const bg = getComputedStyle(document.documentElement).getPropertyValue(
       '--bg'
     );
-    setTheme({
-      font: bg,
-      bg: font,
-    });
-    document.documentElement.style.setProperty('--font', bg);
-    document.documentElement.style.setProperty('--bg', font);
+    let theme = {
+      font: bg.trim(),
+      bg: font.trim(),
+    };
+    setTheme(theme);
+    console.log(`changeTheme ran ${JSON.stringify(theme)}`);
+    // document.documentElement.style.setProperty('--font', bg);
+    // document.documentElement.style.setProperty('--bg', font);
+    console.log(`Theme changed`);
   };
 
   return (
@@ -45,7 +64,7 @@ export default function Navbar() {
             <a href="/Doctors">Doctors</a>
           </li>
           <li>
-            <a href="/About">About Us</a>
+            <a href="/Register">Register</a>
           </li>
           <li>
             {/* <a alt="Change Theme" onClick={() => changeTheme()}>
