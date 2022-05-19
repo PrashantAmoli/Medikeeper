@@ -1,23 +1,23 @@
 import { useRef, useState } from 'react';
-import { validateID, validateName } from './validations.js';
+import { validateID, validateName, validateAddress } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 
 export default function PatientRegistrationForm() {
   const [Data, setData] = useState({
     patientsID: '',
     patientsName: '',
-    doctorsName: '',
-    hospitalsName: '',
+    number: '',
+    address: '',
+    allergies: [],
     gender: '',
     dob: '',
   });
 
   const patientsIDRef = useRef();
   const patientsNameRef = useRef();
-  const doctorsNameRef = useRef();
   const hospitalsNameRef = useRef();
-  const doctorsIDRef = useRef();
-  const genderRef = useRef();
+  const addressRef = useRef();
+  const allergiesRef = useRef();
   const dobRef = useRef();
 
   const handleSubmit = (e) => {
@@ -25,14 +25,25 @@ export default function PatientRegistrationForm() {
 
     let data = { ...Data };
 
-    if (validateID(patientsIDRef.current.value.trim()))
-      data.patientsID = patientsIDRef.current.value.trim();
-    if (validateName(patientsNameRef.current.value.trim()))
-      data.patientsName = patientsNameRef.current.value.trim();
-    if (validateName(doctorsNameRef.current.value.trim()))
-      data.doctorsName = doctorsNameRef.current.value.trim();
-    if (validateName(hospitalsNameRef.current.value.trim()))
-      data.hospitalsName = hospitalsNameRef.current.value.trim();
+    data.number = patientsIDRef.current.value.replace(/\s+/g, ' ').trim();
+    let num = data.number;
+    num = `${num}${num.charAt(0)}${num.charAt(1)}`;
+
+    if (validateID(num)) data.patientsID = num;
+    if (validateName(patientsNameRef.current.value.replace(/\s+/g, ' ').trim()))
+      data.patientsName = patientsNameRef.current.value
+        .replace(/\s+/g, ' ')
+        .trim();
+    if (validateAddress(addressRef.current.value.replace(/\s+/g, ' ').trim()))
+      data.address = addressRef.current.value.replace(/\s+/g, ' ').trim(); // remove extra spaces
+    let allergies = allergiesRef.current.value.replace(/\s+/g, '').trim(); // remove all spaces
+    if (allergies.length > 3) {
+      allergies = allergies.split(',');
+      let temp = data.allergies.concat(allergies);
+      allergies = [...new Set([...data.allergies, ...allergies])];
+      data.allergies = [...allergies];
+      console.log(allergies);
+    }
     data.dob = dobRef.current.value;
     data.gender = gender;
     setData(data);
@@ -59,6 +70,7 @@ export default function PatientRegistrationForm() {
         name="phone-number"
         className="phone-number"
         placeholder="Phone Number"
+        ref={patientsIDRef}
       />
       <div className={styles.rowForm}>
         <label htmlFor="dob">Date of Birth:</label>
@@ -76,6 +88,7 @@ export default function PatientRegistrationForm() {
         cols="20"
         rows="4"
         placeholder="Address"
+        ref={addressRef}
       ></textarea>
       <textarea
         name="allergies"
@@ -83,6 +96,7 @@ export default function PatientRegistrationForm() {
         cols="20"
         rows="4"
         placeholder="Allergies"
+        ref={allergiesRef}
       ></textarea>
       {/* <input
         type="number"
