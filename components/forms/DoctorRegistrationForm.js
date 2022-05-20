@@ -2,38 +2,33 @@ import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 
-export default function ReportForm() {
+export default function RegistrationForm() {
   const [Data, setData] = useState({
-    patientsID: '',
-    patientsName: '',
+    doctorsID: '',
+    speciality: '',
     doctorsName: '',
     hospitalsName: '',
     gender: '',
-    dob: '',
   });
 
-  const patientsIDRef = useRef();
-  const patientsNameRef = useRef();
+  const specialityRef = useRef();
   const doctorsNameRef = useRef();
   const hospitalsNameRef = useRef();
   const doctorsIDRef = useRef();
-  const genderRef = useRef();
-  const dobRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     let data = { ...Data };
 
-    if (validateID(patientsIDRef.current.value.trim()))
-      data.patientsID = patientsIDRef.current.value.trim();
-    if (validateName(patientsNameRef.current.value.trim()))
-      data.patientsName = patientsNameRef.current.value.trim();
+    if (validateID(doctorsIDRef.current.value.trim()))
+      data.doctorsID = doctorsIDRef.current.value.trim();
+    if (validateName(specialityRef.current.value.trim()))
+      data.speciality = specialityRef.current.value.trim();
     if (validateName(doctorsNameRef.current.value.trim()))
       data.doctorsName = doctorsNameRef.current.value.trim();
     if (validateName(hospitalsNameRef.current.value.trim()))
       data.hospitalsName = hospitalsNameRef.current.value.trim();
-    data.dob = dobRef.current.value;
     data.gender = gender;
     setData(data);
 
@@ -49,29 +44,31 @@ export default function ReportForm() {
     <form className={styles.form} onSubmit={handleSubmit}>
       <input
         type="text"
-        name="patient-name"
-        className="patient-name"
-        placeholder="Patient's Name"
-        ref={patientsNameRef}
+        name="doctor"
+        className="doctor"
+        placeholder="Doctor's Name"
+        ref={doctorsNameRef}
       />
       <input
-        type="number"
-        name="patient-id"
-        className="patient-id"
-        placeholder="Patient ID"
-        ref={patientsIDRef}
+        type="text"
+        name="speciality"
+        className="speciality"
+        placeholder="Speciality"
+        ref={specialityRef}
       />
-      <div className={styles.rowForm}>
-        <label htmlFor="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" ref={dobRef} />
-      </div>
       <div className={styles.rowForm} onChange={setGender}>
         <label htmlFor="male">Male</label>
         <input type="radio" id="male" name="gender" value="Male" />
         <label htmlFor="female">Female</label>
         <input type="radio" id="female" name="gender" value="Female" />
       </div>
-      <input type="file" id="report" name="report" accept=".pdf" />
+      <input
+        type="tel"
+        name="doctors-id"
+        className="doctors-id"
+        placeholder="Doctor's Number"
+        ref={doctorsIDRef}
+      />
       <input
         type="text"
         name="hospital"
@@ -79,30 +76,10 @@ export default function ReportForm() {
         placeholder="Hospital"
         ref={hospitalsNameRef}
       />
-      <input
-        type="text"
-        name="doctor"
-        className="doctor"
-        placeholder="Doctor's Name"
-        ref={doctorsNameRef}
-      />
       <button type="submit" className={styles.btn}>
         Submit
       </button>
       <h3>{JSON.stringify(Data)}</h3>
-      {/* <input
-        type="text"
-        name="phone-number"
-        className="phone-number"
-        placeholder="Phone Number"
-        />
-        <textarea
-        name="patients-address"
-        id="patients-address"
-        cols="20"
-        rows="4"
-        placeholder="Address"
-      ></textarea> */}
     </form>
   );
 }

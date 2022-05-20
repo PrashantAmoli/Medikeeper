@@ -6,7 +6,7 @@ export default function Reports() {
   return (
     <>
       <Head>
-        <title>Patients</title>
+        <title>Patients </title>
       </Head>
       <Navbar />
       <PatientForm />
