@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Welcome from '../components/cards/Welcome.js';
+import Metamask from '../components/scripts/Metamask.js';
 import Navbar from '../components/Navbar.js';
 
 export default function Home() {
@@ -12,6 +13,9 @@ export default function Home() {
       <Navbar />
       <div className={styles.container}>
         <Welcome />
+      </div>
+      <div>
+        <Metamask />
       </div>
     </>
   );

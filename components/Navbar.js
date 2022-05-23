@@ -1,27 +1,23 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
+import useStorage from './hooks/useStorage.js';
 
 export default function Navbar() {
   const checked = useRef();
-  const stateRef = useRef({});
-  const [Theme, setTheme] = useState({
+
+  const { getItem, setItem, removeItem } = useStorage();
+
+  let theme = {
     font: '',
     bg: '',
-  });
+  };
 
-  stateRef.current = Theme;
-
-  useEffect(() => {
-    setTimeout(() => {
-      document.documentElement.style.setProperty(
-        '--font',
-        stateRef.current.font
-      );
-      document.documentElement.style.setProperty('--bg', stateRef.current.bg);
-      console.log(`use effect ran ${JSON.stringify(Theme)}`);
-    }, 4000);
-    // document.documentElement.style.setProperty('--font', Theme.font);
-    // document.documentElement.style.setProperty('--bg', Theme.bg);
-  }, [Theme]);
+  const setTheme = () => {
+    document.documentElement.style.setProperty('--font', getItem('font'));
+    document.documentElement.style.setProperty('--bg', getItem('bg'));
+  };
+  if (getItem('bg')) {
+    setTheme();
+  }
 
   const changeTheme = () => {
     const font = getComputedStyle(document.documentElement).getPropertyValue(
@@ -30,15 +26,16 @@ export default function Navbar() {
     const bg = getComputedStyle(document.documentElement).getPropertyValue(
       '--bg'
     );
-    let theme = {
+    theme = {
       font: bg.trim(),
       bg: font.trim(),
     };
-    setTheme(theme);
-    console.log(`changeTheme ran ${JSON.stringify(theme)}`);
-    // document.documentElement.style.setProperty('--font', bg);
-    // document.documentElement.style.setProperty('--bg', font);
-    console.log(`Theme changed`);
+    //Session Storage
+    setItem('font', theme.font);
+    setItem('bg', theme.bg);
+
+    document.documentElement.style.setProperty('--bg', font);
+    document.documentElement.style.setProperty('--font', bg);
   };
 
   return (
