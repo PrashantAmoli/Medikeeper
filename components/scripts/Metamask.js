@@ -6,17 +6,22 @@ import styles from '../../styles/cards.module.css';
 export default function Metamask() {
   const [Data, setData] = useState({
     address: '',
-    balance: null,
+    balance: '',
   });
 
   const { setItem, getItem, removeItem } = useStorage();
 
   useEffect(() => {
-    setItem('address', Data.address);
-  }, [Data]);
+    const address = getItem('address');
+    const balance = getItem('balance');
+    if (getItem('address') && getItem('balance'))
+      setData({
+        address: address,
+        balance: balance,
+      });
+  }, []);
 
-  // Button handler button for handling a
-  // request event for metamask
+  // Button handler button for handling a request event for metamask
   const handle = () => {
     // Asking if metamask is already present or not
     if (window.ethereum) {
@@ -25,12 +30,11 @@ export default function Metamask() {
         .request({ method: 'eth_requestAccounts' })
         .then((res) => accountChangeHandler(res[0]));
     } else {
-      alert('install metamask extension!!');
+      alert('Install Metamask extension on your desktop brower to continue!!!');
     }
   };
 
-  // getbalance function for getting a balance in
-  // a right format with help of ethers
+  // getbalance function for getting a balance in a right format with help of ethers
   const getbalance = (address) => {
     // Requesting balance method
     window.ethereum
@@ -44,17 +48,14 @@ export default function Metamask() {
           address: address,
           balance: ethers.utils.formatEther(balance),
         });
+        setItem('address', address);
+        setItem('balance', ethers.utils.formatEther(balance));
       });
   };
 
   // Function for getting handling all events
   const accountChangeHandler = (account) => {
     // Setting an address Data
-    setData({
-      address: account,
-      balance: null,
-    });
-
     // Setting a balance
     getbalance(account);
   };
@@ -62,9 +63,10 @@ export default function Metamask() {
   const logout = () => {
     // if(getItem('address'))
     removeItem('address');
+    removeItem('balance');
     setData({
-      address: getItem('address'),
-      balance: null,
+      address: getItem('address') || '',
+      balance: getItem('balance') || '',
     });
   };
   return (
@@ -81,8 +83,10 @@ export default function Metamask() {
           <h4>Connect using your Metamask account</h4>
         ) : (
           <>
-            <h4>Address: {Data.address}</h4>
-            <h4>Balance: {Data.balance}</h4>
+            <h4>Address: </h4>
+            <h4>{Data.address}</h4>
+            <h4>Balance: </h4>
+            <h4>{Data.balance}</h4>
           </>
         )}
       </div>
