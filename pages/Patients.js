@@ -5,6 +5,7 @@ import Redirect from '../components/cards/Redirect.js';
 import useStorage from '../components/hooks/useStorage.js';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import PatientData from '../components/cards/PatientData.js';
 
 export default function Reports() {
   const router = useRouter();
@@ -22,6 +23,7 @@ export default function Reports() {
       </Head>
       <Navbar />
       {getItem('address') ? <PatientForm /> : <Redirect />}
+      <PatientData />
     </>
   );
 }

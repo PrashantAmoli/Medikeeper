@@ -4,9 +4,10 @@ import Navbar from '../components/Navbar.js';
 import ReportForm from '../components/forms/ReportForm.js';
 import { useRouter } from 'next/router';
 import Redirect from '../components/cards/Redirect.js';
+import Report from '../components/cards/Report.js';
 import useStorage from '../components/hooks/useStorage.js';
 
-export default function Patients() {
+export default function Reports() {
   const router = useRouter();
   const { getItem } = useStorage();
 
@@ -23,6 +24,7 @@ export default function Patients() {
       </Head>
       <Navbar />
       {getItem('address') ? <ReportForm /> : <Redirect />}
+      <Report />
     </>
   );
 }
