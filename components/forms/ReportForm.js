@@ -71,7 +71,9 @@ export default function ReportForm() {
         <label htmlFor="female">Female</label>
         <input type="radio" id="female" name="gender" value="Female" />
       </div>
-      <input type="file" id="report" name="report" accept=".pdf" />
+      <div className={styles.rowForm}>
+        <input type="file" id="report" name="report" accept=".pdf" />
+      </div>
       <input
         type="text"
         name="hospital"
@@ -89,7 +91,10 @@ export default function ReportForm() {
       <button type="submit" className={styles.btn}>
         Submit
       </button>
-      <h3>{JSON.stringify(Data)}</h3>
+
+      <div className={styles.state}>
+        <span>{JSON.stringify(Data)}</span>
+      </div>
       {/* <input
         type="text"
         name="phone-number"

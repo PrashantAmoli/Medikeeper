@@ -79,7 +79,9 @@ export default function RegistrationForm() {
       <button type="submit" className={styles.btn}>
         Submit
       </button>
-      <h3>{JSON.stringify(Data)}</h3>
+      <div className={styles.state}>
+        <span>{JSON.stringify(Data)}</span>
+      </div>
     </form>
   );
 }

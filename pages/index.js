@@ -14,9 +14,7 @@ export default function Home() {
       <div className={styles.container}>
         <Welcome />
       </div>
-      <div>
-        <Metamask />
-      </div>
+      <Metamask />
     </>
   );
 }
