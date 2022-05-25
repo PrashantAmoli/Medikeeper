@@ -10,14 +10,16 @@ export default function ReportForm() {
     hospitalsName: '',
     gender: '',
     dob: '',
+    diagnosis: '',
+    prescription: '',
   });
 
   const patientsIDRef = useRef();
   const patientsNameRef = useRef();
   const doctorsNameRef = useRef();
   const hospitalsNameRef = useRef();
-  const doctorsIDRef = useRef();
-  const genderRef = useRef();
+  const diagnosisRef = useRef();
+  const prescriptionRef = useRef();
   const dobRef = useRef();
 
   const handleSubmit = (e) => {
@@ -33,6 +35,10 @@ export default function ReportForm() {
       data.doctorsName = doctorsNameRef.current.value.trim();
     if (validateName(hospitalsNameRef.current.value.trim()))
       data.hospitalsName = hospitalsNameRef.current.value.trim();
+    if (validateName(diagnosisRef.current.value.trim()))
+      data.diagnosis = diagnosisRef.current.value.trim();
+    if (validateName(prescriptionRef.current.value.trim()))
+      data.prescription = prescriptionRef.current.value.trim();
     data.dob = dobRef.current.value;
     data.gender = gender;
     setData(data);
@@ -71,7 +77,9 @@ export default function ReportForm() {
         <label htmlFor="female">Female</label>
         <input type="radio" id="female" name="gender" value="Female" />
       </div>
-      <input type="file" id="report" name="report" accept=".pdf" />
+      <div className={styles.rowForm}>
+        <input type="file" id="report" name="report" accept=".pdf" />
+      </div>
       <input
         type="text"
         name="hospital"
@@ -86,10 +94,29 @@ export default function ReportForm() {
         placeholder="Doctor's Name"
         ref={doctorsNameRef}
       />
+      <textarea
+        name="diagnosis"
+        id="diagnosis"
+        cols="20"
+        rows="4"
+        placeholder="Diagnosis :"
+        ref={diagnosisRef}
+      ></textarea>
+      <textarea
+        name="prescription"
+        id="prescription"
+        cols="20"
+        rows="4"
+        placeholder="Prescription :"
+        ref={prescriptionRef}
+      ></textarea>
       <button type="submit" className={styles.btn}>
         Submit
       </button>
-      <h3>{JSON.stringify(Data)}</h3>
+
+      <div className={styles.state}>
+        <span>{JSON.stringify(Data)}</span>
+      </div>
       {/* <input
         type="text"
         name="phone-number"

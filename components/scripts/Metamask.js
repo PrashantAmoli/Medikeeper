@@ -1,14 +1,27 @@
 import { ethers } from 'ethers';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import useStorage from '../hooks/useStorage.js';
+import styles from '../../styles/cards.module.css';
 
 export default function Metamask() {
-  const [data, setdata] = useState({
+  const [Data, setData] = useState({
     address: '',
-    Balance: null,
+    balance: '',
   });
 
-  // Button handler button for handling a
-  // request event for metamask
+  const { setItem, getItem, removeItem } = useStorage();
+
+  useEffect(() => {
+    const address = getItem('address');
+    const balance = getItem('balance');
+    if (getItem('address') && getItem('balance'))
+      setData({
+        address: address,
+        balance: balance,
+      });
+  }, []);
+
+  // Button handler button for handling a request event for metamask
   const handle = () => {
     // Asking if metamask is already present or not
     if (window.ethereum) {
@@ -17,12 +30,11 @@ export default function Metamask() {
         .request({ method: 'eth_requestAccounts' })
         .then((res) => accountChangeHandler(res[0]));
     } else {
-      alert('install metamask extension!!');
+      alert('Install Metamask extension on your desktop brower to continue!!!');
     }
   };
 
-  // getbalance function for getting a balance in
-  // a right format with help of ethers
+  // getbalance function for getting a balance in a right format with help of ethers
   const getbalance = (address) => {
     // Requesting balance method
     window.ethereum
@@ -32,30 +44,52 @@ export default function Metamask() {
       })
       .then((balance) => {
         // Setting balance
-        setdata({
+        setData({
           address: address,
-          Balance: ethers.utils.formatEther(balance),
+          balance: ethers.utils.formatEther(balance),
         });
+        setItem('address', address);
+        setItem('balance', ethers.utils.formatEther(balance));
       });
   };
 
   // Function for getting handling all events
   const accountChangeHandler = (account) => {
-    // Setting an address data
-    setdata({
-      address: account,
-      Balance: null,
-    });
-
+    // Setting an address Data
     // Setting a balance
     getbalance(account);
   };
+
+  const logout = () => {
+    // if(getItem('address'))
+    removeItem('address');
+    removeItem('balance');
+    setData({
+      address: getItem('address') || '',
+      balance: getItem('balance') || '',
+    });
+  };
   return (
     <>
-      <button onClick={handle}>Metamask</button>
-      {/* <h1>Connection: {Data.connection}</h1> */}
-      <h1>Address: {data.address}</h1>
-      <h1>Balance: {data.Balance}</h1>
+      <div className={styles.card}>
+        <h2>Metamask</h2>
+        {Data.address == '' || Data.address == undefined ? (
+          <button onClick={handle}>Login</button>
+        ) : (
+          <button onClick={logout}>Logout</button>
+        )}
+
+        {Data.address == '' || Data.address == undefined ? (
+          <h4>Connect using your Metamask account</h4>
+        ) : (
+          <>
+            <h4>Address: </h4>
+            <h4>{Data.address}</h4>
+            <h4>Balance: </h4>
+            <h4>{Data.balance}</h4>
+          </>
+        )}
+      </div>
     </>
   );
 }
