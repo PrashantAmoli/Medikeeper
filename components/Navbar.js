@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import Link from 'next/link';
 import useStorage from './hooks/useStorage.js';
 
 export default function Navbar() {
@@ -50,19 +51,29 @@ export default function Navbar() {
           </div>
           <ul className="menu-items">
             <li>
-              <a href="/">Home</a>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
             </li>
             <li>
-              <a href="/Reports">Reports</a>
+              <Link href="/Reports">
+                <a>Reports</a>
+              </Link>
             </li>
             <li>
-              <a href="/Patients">Patients</a>
+              <Link href="/Patients">
+                <a>Patients</a>
+              </Link>
             </li>
             <li>
-              <a href="/Doctors">Doctors</a>
+              <Link href="/Doctors">
+                <a>Doctors</a>
+              </Link>
             </li>
             <li>
-              <a href="/Register">Register</a>
+              <Link href="/Register">
+                <a>Register</a>
+              </Link>
             </li>
             <li>
               {/* <a alt="Change Theme" onClick={() => changeTheme()}>
@@ -85,7 +96,9 @@ export default function Navbar() {
             </li>
           </ul>
           <h1 className="logo">
-            <a href="/1">Medikeeper</a>
+            <Link href="/404">
+              <a>Medikeeper</a>
+            </Link>
           </h1>
         </div>
       </nav>
