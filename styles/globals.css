@@ -108,10 +108,10 @@ body {
   .navbar-container input[type='checkbox'] {
     position: absolute;
     display: block;
-    height: 32px;
-    width: 30px;
-    top: 20px;
-    left: 20px;
+    height: 44px;
+    width: 44px;
+    /* top: 20px;
+    left: 20px; */
     z-index: 5;
     opacity: 0;
     cursor: pointer;

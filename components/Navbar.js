@@ -85,9 +85,14 @@ export default function Navbar() {
                   type="checkbox"
                   className="checkbox"
                   id="checkbox"
-                  onClick={() => changeTheme()}
+                  style={{ display: 'none' }}
+                  // onClick={() => changeTheme()}
                 />
-                <label htmlFor="checkbox" className="label">
+                <label
+                  htmlFor="checkbox"
+                  className="label"
+                  onClick={() => changeTheme()}
+                >
                   <i className="fas fa-sun"></i>
                   <i className="fas fa-moon"></i>
                   <div className="ball"></div>
