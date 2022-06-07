@@ -1,16 +1,18 @@
 import { useRef, useState } from 'react';
 import { validateID } from './validations.js';
 import styles from '../../styles/Forms.module.css';
+import { addDoc, getDoc } from '../scripts/contracts.js'
 
 export default function DoctorsForm() {
   const [ID, setID] = useState('');
 
   const IDRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (!validateID(IDRef.current.value.trim())) return false;
-    setID(IDRef.current.value.trim());
+    await setID(IDRef.current.value.trim());
+    await getDoc(IDRef.current.value.trim());
     return true;
   };
 
