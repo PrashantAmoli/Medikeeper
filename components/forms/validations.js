@@ -9,7 +9,7 @@ export const validateAddress = (name) => {
 };
 
 export const validateID = (ID) => {
-  if (ID.length != 12) return false;
+  if (ID.length != 10) return false;
   let isnum = /^\d+$/.test(ID);
   if (!isnum) return false;
   return true;

@@ -1,22 +1,26 @@
 import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
+import useDoctor from '../hooks/useDoctor.js';
 
 export default function RegistrationForm() {
   const [Data, setData] = useState({
     doctorsID: '',
     speciality: '',
     doctorsName: '',
-    hospitalsName: '',
+    hospital: '',
     gender: '',
   });
 
+  // * using Custom hook to interact with Contract
+  const { connect, account, user, addDoctor } = useDoctor();
+
   const specialityRef = useRef();
   const doctorsNameRef = useRef();
-  const hospitalsNameRef = useRef();
+  const hospitalRef = useRef();
   const doctorsIDRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let data = { ...Data };
@@ -27,10 +31,13 @@ export default function RegistrationForm() {
       data.speciality = specialityRef.current.value.trim();
     if (validateName(doctorsNameRef.current.value.trim()))
       data.doctorsName = doctorsNameRef.current.value.trim();
-    if (validateName(hospitalsNameRef.current.value.trim()))
-      data.hospitalsName = hospitalsNameRef.current.value.trim();
+    if (validateName(hospitalRef.current.value.trim()))
+      data.hospital = hospitalRef.current.value.trim();
     data.gender = gender;
-    setData(data);
+
+    await setData(data);
+    // await connect();
+    await addDoctor(Data);
 
     return true;
   };
@@ -39,6 +46,8 @@ export default function RegistrationForm() {
   const setGender = (e) => {
     gender = e.target.value;
   };
+
+  // * Adding to contract
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -74,7 +83,7 @@ export default function RegistrationForm() {
         name="hospital"
         className="hospital"
         placeholder="Hospital"
-        ref={hospitalsNameRef}
+        ref={hospitalRef}
       />
       <button type="submit" className={styles.btn}>
         Submit
