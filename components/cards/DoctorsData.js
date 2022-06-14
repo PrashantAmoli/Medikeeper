@@ -2,7 +2,7 @@ import styles from '../../styles/cards.module.css';
 
 const DoctorsData = ({Doctor}) => {
 
-  console.log('DD:5', JSON.stringify(Doctor));
+  // console.log('DD:5', JSON.stringify(Doctor));
   if(Doctor === undefined || Doctor.length == 0){
     return(
       <div className={styles.card} >

@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
-import useDoctor from '../hooks/useDoctor.js';
+// import useDoctor from '../hooks/useDoctor.js';
+import AddData from '../scripts/AddData.js';
 
 export default function RegistrationForm() {
   const [Data, setData] = useState({
@@ -13,7 +14,8 @@ export default function RegistrationForm() {
   });
 
   // * using Custom hook to interact with Contract
-  const { connect, account, user, addDoctor } = useDoctor();
+  // const { connect, account, user, addDoctor } = useDoctor();
+  const { addDoctor } = AddData();
 
   const specialityRef = useRef();
   const doctorsNameRef = useRef();
@@ -36,7 +38,6 @@ export default function RegistrationForm() {
     data.gender = gender;
 
     await setData(data);
-    // await connect();
     await addDoctor(Data);
 
     return true;

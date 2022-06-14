@@ -61,23 +61,22 @@ const useDoctor = () => {
     const contract = getContract();
     console.log(contract);
 
-    const result = contract.AddMedicalInfoDoctor(
+    const result = contract.addMedicalInfoDoctor(
       Doctor.doctorsName,
       Doctor.doctorsID,
       Doctor.speciality,
       Doctor.hospital,
       Doctor.gender
     );
-    //   .send(
-    //     {
-    //       from: currentAccount,
-    //     },
-    //     (err, result) => {
-    //       if (err) {
-    //         console.log(err);
-    //       }
-    //     }
-    //   );
+    // .send(
+    //   {
+    //     from: currentAccount,
+    //   },
+    //   (err, result) => {
+    //     if (err) console.log(err);
+    //     else if (result) console.log(result);
+    //   }
+    // );
 
     console.log(result);
     console.log(JSON.stringify(Doctor));
