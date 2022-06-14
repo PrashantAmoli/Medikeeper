@@ -3,7 +3,8 @@ import GetMedicalInfo from '../ABIs/GetMedicalInfo.json';
 import { useState, useEffect } from 'react';
 
 const GetMedicalInfoABI = GetMedicalInfo.abi;
-const contractAddress = '0x0165878A594ca255338adfa4d48449f69242Eb8F';
+// const contractAddress = '0x0165878A594ca255338adfa4d48449f69242Eb8F'; // localhost
+const contractAddress = '0x19b1970917E1Ec7D627924B65aaD0F4eac3BaD3b'; // Goerli
 
 const GetData = () => {
   const [Account, setAccount] = useState('');
@@ -24,7 +25,7 @@ const GetData = () => {
   };
 
   const getDoctor = async (ID) => {
-    load();
+    await load();
 
     const account = await getCurrentAccount();
     const contract = await new web3.eth.Contract(
@@ -32,24 +33,96 @@ const GetData = () => {
       contractAddress
     );
 
-    console.log(contract.methods);
-
-    const result = await contract.methods.getMedicalInfoDoctor(String(ID)).send(
+    const result = await contract.methods.getMedicalInfoDoctor(String(ID)).call(
       {
         from: account,
       },
       (err, result) => {
         if (err) console.log(err);
         if (result) {
-          console.log(result[0], result[1], result[2], result[3]);
+          console.log(
+            'GetData Result: ',
+            result[0],
+            result[1],
+            result[2],
+            result[3]
+          );
         }
       }
     );
     console.log(JSON.stringify(result), result);
+    // name, speciality, hospital, gender
     return result;
   };
 
-  return { getDoctor };
+  const getPatient = async (ID) => {
+    await load();
+
+    const account = await getCurrentAccount();
+    const contract = await new web3.eth.Contract(
+      GetMedicalInfoABI,
+      contractAddress
+    );
+
+    const result = await contract.methods
+      .getMedicalInfoPatient(String(ID))
+      .call(
+        {
+          from: account,
+        },
+        (err, result) => {
+          if (err) console.log(err);
+          if (result) {
+            console.log(
+              'GetData Result: ',
+              result[0],
+              result[1],
+              result[2],
+              result[3],
+              result[4],
+              result[5]
+            );
+          }
+        }
+      );
+    console.log(JSON.stringify(result), result);
+    return result;
+  };
+
+  const getReport = async (ID) => {
+    await load();
+
+    const account = await getCurrentAccount();
+    const contract = await new web3.eth.Contract(
+      GetMedicalInfoABI,
+      contractAddress
+    );
+
+    const result = await contract.methods.getMedicalRecords(String(ID)).call(
+      {
+        from: account,
+      },
+      (err, result) => {
+        if (err) console.log(err);
+        if (result) {
+          console.log(
+            'GetData Result: ',
+            result[0],
+            result[1],
+            result[2],
+            result[3],
+            result[4],
+            result[5]
+          );
+        }
+      }
+    );
+    // lastUpdated, medicalDosage, UpdatedBy, diagnosis, PDF, allPDF
+    console.log(JSON.stringify(result), result);
+    return result;
+  };
+
+  return { Account, getPatient, getDoctor, getReport };
 };
 
 export default GetData;

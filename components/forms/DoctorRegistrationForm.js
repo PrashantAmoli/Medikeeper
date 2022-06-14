@@ -38,7 +38,7 @@ export default function RegistrationForm() {
     data.gender = gender;
 
     await setData(data);
-    await addDoctor(Data);
+    await addDoctor(data);
 
     return true;
   };
@@ -76,7 +76,7 @@ export default function RegistrationForm() {
         type="tel"
         name="doctors-id"
         className="doctors-id"
-        placeholder="Doctor's Number"
+        placeholder="Doctor's ID"
         ref={doctorsIDRef}
       />
       <input
