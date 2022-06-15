@@ -1,47 +1,58 @@
 import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
+import AddData from '../scripts/AddData.js';
 
 export default function ReportForm() {
   const [Data, setData] = useState({
     patientsID: '',
-    patientsName: '',
-    doctorsName: '',
-    hospitalsName: '',
-    gender: '',
-    dob: '',
+    lastUpdated: '',
+    currentMedicalDosage: '',
+    updatedBy: '',
     diagnosis: '',
-    prescription: '',
+    pdf: '',
   });
 
   const patientsIDRef = useRef();
   const patientsNameRef = useRef();
-  const doctorsNameRef = useRef();
+  const doctorsIDRef = useRef();
   const hospitalsNameRef = useRef();
   const diagnosisRef = useRef();
   const prescriptionRef = useRef();
   const dobRef = useRef();
 
-  const handleSubmit = (e) => {
+  const { addRecord } = AddData();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let data = { ...Data };
 
     if (validateID(patientsIDRef.current.value.trim()))
-      data.patientsID = patientsIDRef.current.value.trim();
-    if (validateName(patientsNameRef.current.value.trim()))
-      data.patientsName = patientsNameRef.current.value.trim();
-    if (validateName(doctorsNameRef.current.value.trim()))
-      data.doctorsName = doctorsNameRef.current.value.trim();
-    if (validateName(hospitalsNameRef.current.value.trim()))
-      data.hospitalsName = hospitalsNameRef.current.value.trim();
+      data.patientsID = patientsIDRef.current.value;
+
+    // if (validateName(patientsNameRef.current.value.trim()))
+    //   data.patientsName = patientsNameRef.current.value.trim();
+
+    if (validateID(doctorsIDRef.current.value.trim()))
+      data.updatedBy = doctorsIDRef.current.value;
+
+    // if (validateName(hospitalsNameRef.current.value.trim()))
+    //   data.hospitalsName = hospitalsNameRef.current.value.trim();
+
     if (validateName(diagnosisRef.current.value.trim()))
-      data.diagnosis = diagnosisRef.current.value.trim();
+      data.diagnosis = diagnosisRef.current.value;
+
     if (validateName(prescriptionRef.current.value.trim()))
-      data.prescription = prescriptionRef.current.value.trim();
-    data.dob = dobRef.current.value;
+      data.currentMedicalDosage = prescriptionRef.current.value;
+
+    data.lastUpdated = String(dobRef.current.value);
     data.gender = gender;
-    setData(data);
+
+    data.pdf = 'bafybeifynkhsnf63nsriir56zdox3fa5o62hejotpj3zzpemzztceiqauy';
+    await setData(data);
+
+    await addRecord(data);
 
     return true;
   };
@@ -61,22 +72,29 @@ export default function ReportForm() {
         ref={patientsNameRef}
       />
       <input
-        type="number"
+        type="text"
+        name="doctor"
+        className="doctor"
+        placeholder="Doctor's ID"
+        ref={doctorsIDRef}
+      />
+      <input
+        type="text"
         name="patient-id"
         className="patient-id"
         placeholder="Patient ID"
         ref={patientsIDRef}
       />
       <div className={styles.rowForm}>
-        <label htmlFor="dob">Date of Birth:</label>
+        <label htmlFor="dob">Date:</label>
         <input type="date" id="dob" name="dob" ref={dobRef} />
       </div>
-      <div className={styles.rowForm} onChange={setGender}>
+      {/* <div className={styles.rowForm} onChange={setGender}>
         <label htmlFor="male">Male</label>
         <input type="radio" id="male" name="gender" value="Male" />
         <label htmlFor="female">Female</label>
         <input type="radio" id="female" name="gender" value="Female" />
-      </div>
+      </div> */}
       <div className={styles.rowForm}>
         <input type="file" id="report" name="report" accept=".pdf" />
       </div>
@@ -86,13 +104,6 @@ export default function ReportForm() {
         className="hospital"
         placeholder="Hospital"
         ref={hospitalsNameRef}
-      />
-      <input
-        type="text"
-        name="doctor"
-        className="doctor"
-        placeholder="Doctor's Name"
-        ref={doctorsNameRef}
       />
       <textarea
         name="diagnosis"

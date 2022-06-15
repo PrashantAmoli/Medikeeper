@@ -55,9 +55,6 @@ const AddData = () => {
     console.log('Result', JSON.stringify(result));
   };
 
-  //   return { addDoctor };
-  // };
-
   const addPatient = async (Patient) => {
     await load();
 
@@ -91,7 +88,39 @@ const AddData = () => {
     console.log('Result', JSON.stringify(result));
   };
 
-  return { Account, addDoctor, addPatient };
+  const addRecord = async (Report) => {
+    await load();
+
+    const account = await getCurrentAccount();
+    const contract = await new web3.eth.Contract(
+      AddMedicalInfoABI,
+      contractAddress
+    );
+
+    console.log(JSON.stringify(Report));
+
+    const result = await contract.methods
+      .addMedicalRecords(
+        Report.patientsID,
+        Report.lastUpdated,
+        Report.currentMedicalDosage,
+        Report.updatedBy,
+        Report.diagnosis,
+        Report.pdf
+      )
+      .send(
+        {
+          from: account,
+        },
+        (err, result) => {
+          if (err) console.log(err);
+          else if (result) console.log(result, JSON.stringify(result));
+        }
+      );
+    console.log('Result', JSON.stringify(result));
+  };
+
+  return { Account, addDoctor, addPatient, addRecord };
 };
 
 export default AddData;

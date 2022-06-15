@@ -1,6 +1,6 @@
 import styles from '../../styles/cards.module.css';
 
-const PatientData = (Patient) => {
+const PatientData = ({ Patient }) => {
   return (
     <>
       <div className={styles.card}>

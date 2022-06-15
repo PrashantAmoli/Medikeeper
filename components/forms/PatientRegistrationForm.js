@@ -50,7 +50,7 @@ export default function PatientRegistrationForm() {
     //   data.allergies = [...allergies];
     //   console.log(allergies);
     // }
-    data.dob = dobRef.current.value;
+    data.dob = String(dobRef.current.value);
     data.gender = gender;
     await setData(data);
     console.log(JSON.stringify(data));
