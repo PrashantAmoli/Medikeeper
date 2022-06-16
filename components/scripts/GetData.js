@@ -122,7 +122,7 @@ const GetData = () => {
     return result;
   };
 
-  return { Account, getPatient, getDoctor, getReport };
+  return { load, getCurrentAccount, Account, getPatient, getDoctor, getReport };
 };
 
 export default GetData;
