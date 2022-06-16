@@ -7,7 +7,13 @@ import DoctorsData from '../cards/DoctorsData.js';
 
 export default function DoctorsForm() {
   const [ID, setID] = useState('');
-  const [Doctor, setDoctor] = useState({});
+  const [Doctor, setDoctor] = useState({
+      doctorsID: '',
+      doctorsName: '',
+      speciality: '',
+      hospital: '',
+      gender: '',
+  });
 
   const IDRef = useRef();
 
@@ -22,15 +28,14 @@ export default function DoctorsForm() {
     // await getDoctor(ID);
     console.log('ID state: ', ID);
     const resData = await getDoctor(ID);
-    const doctor = {
-      doctorsID: ID,
-      doctorsName: resData[0],
-      speciality: resData[1],
-      hospital: resData[2],
-      gender: resData[3],
-    };
+    const doctor = { ...Doctor }
+    doctor.doctorsID = ID,
+    doctor.doctorsName = resData[0],
+    doctor.speciality = resData[1],
+    doctor.hospital = resData[2],
+    doctor.gender = resData[3],
     await setDoctor(doctor);
-    return true;
+    return true; 
   };
 
   return (

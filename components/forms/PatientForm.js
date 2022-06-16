@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { validateID } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import PatientData from '../cards/PatientData.js';
-import Report from '../cards/Report.js';
 import GetData from '../scripts/GetData.js';
 
 export default function PatientForm() {
@@ -16,19 +15,10 @@ export default function PatientForm() {
     dob: '',
     allergies: '',
   });
-  const [Reports, setReports] = useState({
-    patientsID: '',
-    lastUpdated: '',
-    currentMedicalDosage: '',
-    updatedBy: '',
-    diagnosis: '',
-    pdf: '',
-    pdfAll: '',
-  });
 
   const IDRef = useRef();
 
-  const { getPatient, getReport } = GetData();
+  const { getPatient } = GetData();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,19 +43,6 @@ export default function PatientForm() {
     return true;
   };
 
-  const handleReport = async (e) => {
-    e.preventDefault();
-    const data = { ...Reports };
-    const result = await getReport(IDRef.current.value);
-    data.lastUpdated = result[0];
-    data.currentMedicalDosage = result[1];
-    data.updatedBy = result[2];
-    data.diagnosis = result[3];
-    data.pdf = `https://dweb.link/ipfs/${result[4]}`;
-    data.pdfAll = result[5];
-    await setReports(data);
-  };
-
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -75,20 +52,6 @@ export default function PatientForm() {
         </button>
       </form>
       <PatientData Patient={Patient} />
-
-      <form className={styles.form} onSubmit={handleReport}>
-        <input type="text" placeholder="Patient ID" ref={IDRef} required />
-        <button className={styles.btn} type="submit">
-          Submit
-        </button>
-      </form>
-      <Report Data={Reports} />
-      <h3>{JSON.stringify(Reports)}</h3>
-      <h3>
-        <a href={Reports.pdf} target="_blank">
-          View Report
-        </a>
-      </h3>
     </>
   );
 }

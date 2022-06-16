@@ -16,7 +16,6 @@ export default function PatientRegistrationForm() {
 
   const patientsIDRef = useRef();
   const patientsNameRef = useRef();
-  const hospitalsNameRef = useRef();
   const addressRef = useRef();
   const allergiesRef = useRef();
   const dobRef = useRef();
@@ -106,34 +105,12 @@ export default function PatientRegistrationForm() {
         placeholder="Allergies"
         ref={allergiesRef}
       ></textarea>
-      {/* <input
-        type="number"
-        name="patient-id"
-        className="patient-id"
-        placeholder="Patient ID"
-        ref={patientsIDRef}
-      /> */}
-      {/* <input type="file" id="report" name="report" accept=".pdf" /> */}
-      {/* <input
-        type="text"
-        name="hospital"
-        className="hospital"
-        placeholder="Hospital"
-        ref={hospitalsNameRef}
-      />
-      <input
-        type="text"
-        name="doctor"
-        className="doctor"
-        placeholder="Doctor's Name"
-        ref={doctorsNameRef}
-      /> */}
       <button type="submit" className={styles.btn}>
         Submit
       </button>
-      <div className={styles.state}>
+      {/* <div className={styles.state}>
         <span>{JSON.stringify(Data)}</span>
-      </div>
+      </div> */}
     </form>
   );
 }

@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
-// import useDoctor from '../hooks/useDoctor.js';
 import AddData from '../scripts/AddData.js';
 
 export default function RegistrationForm() {
@@ -13,8 +12,6 @@ export default function RegistrationForm() {
     gender: '',
   });
 
-  // * using Custom hook to interact with Contract
-  // const { connect, account, user, addDoctor } = useDoctor();
   const { addDoctor } = AddData();
 
   const specialityRef = useRef();
@@ -89,9 +86,9 @@ export default function RegistrationForm() {
       <button type="submit" className={styles.btn}>
         Submit
       </button>
-      <div className={styles.state}>
+      {/* <div className={styles.state}>
         <span>{JSON.stringify(Data)}</span>
-      </div>
+      </div> */}
     </form>
   );
 }

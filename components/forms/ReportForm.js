@@ -39,8 +39,6 @@ export default function ReportForm() {
       data.currentMedicalDosage = prescriptionRef.current.value;
 
     data.lastUpdated = String(dobRef.current.value);
-    // data.gender = gender;
-
     data.pdf = 'bafybeifynkhsnf63nsriir56zdox3fa5o62hejotpj3zzpemzztceiqauy';
     await setData(data);
 
@@ -48,11 +46,6 @@ export default function ReportForm() {
 
     return true;
   };
-
-  // let gender = 'Male';
-  // const setGender = (e) => {
-  //   gender = e.target.value;
-  // };
 
   return (
     <>
@@ -98,9 +91,9 @@ export default function ReportForm() {
           Submit
         </button>
 
-        <div className={styles.state}>
+        {/* <div className={styles.state}>
           <span>{JSON.stringify(Data)}</span>
-        </div>
+        </div> */}
       </form>
     </>
   );

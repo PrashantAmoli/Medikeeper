@@ -30,7 +30,7 @@ export default function Register() {
       </Head>
       <Navbar />
       <div className={`${styles.card}`}>
-        <h2>Register</h2>
+        <h2> Register </h2>
         <div className={`${styles.row}`}>
           <button onClick={patientForm}>Patient</button>
           <button onClick={doctorForm}>Doctor</button>
