@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useState, useRef, useEffect } from 'react';
 import styles from '../styles/Forms.module.css';
+import cardStyles from '../styles/cards.module.css';
 import Admin from '../components/scripts/Admin.js';
 import Navbar from '../components/Navbar.js';
 import Redirect from '../components/cards/Redirect.js';
@@ -41,20 +42,23 @@ const AdminPanel = () => {
             ref={addressRef}
             required
           />
-          <button
-            type="submit"
-            className={styles.btn}
-            onClick={() => addAuthentication(addressRef.current.value)}
-          >
-            Authorize
-          </button>
-          <button
-            type="submit"
-            className={styles.btn}
-            onClick={() => removeAuthentication(addressRef.current.value)}
-          >
-            Unauthorize
-          </button>
+
+          <div className={cardStyles.row}>
+            <button
+              type="submit"
+              className={styles.btn}
+              onClick={() => addAuthentication(addressRef.current.value)}
+            >
+              Authorize
+            </button>
+            <button
+              type="submit"
+              className={styles.btn}
+              onClick={() => removeAuthentication(addressRef.current.value)}
+            >
+              Unauthorize
+            </button>
+          </div>
         </form>
       ) : (
         <Redirect />

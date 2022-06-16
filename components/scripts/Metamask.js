@@ -10,17 +10,15 @@ export default function Metamask() {
   const { load, getCurrentAccount } = GetData();
 
   useEffect(() => {
-    if (getItem('address'))
-      setAddress(getItem('address'));
+    if (getItem('address')) setAddress(getItem('address'));
   }, []);
 
   // Button handler button for handling a request event for metamask
-  const handle = async() => {
+  const handle = async () => {
     await load();
     const address = await getCurrentAccount();
     await setAddress(address);
     await setItem('address', address);
-
   };
 
   return (
@@ -34,7 +32,7 @@ export default function Metamask() {
           </>
         ) : (
           <>
-          {/* <button onClick={logout}>Logout</button> */}
+            {/* <button onClick={logout}>Logout</button> */}
             <h4>Address: </h4>
             <h4>{Address}</h4>
           </>

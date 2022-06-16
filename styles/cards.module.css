@@ -16,3 +16,9 @@
   flex-direction: row;
   width: 100%;
 }
+
+@media (max-width: 720px) {
+  .row {
+    flex-direction: column;
+  }
+}
