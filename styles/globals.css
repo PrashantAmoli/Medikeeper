@@ -18,6 +18,7 @@ body {
   background-color: var(--bg);
   color: var(--font);
   padding-bottom: 0.5rem;
+  min-height: 100vh;
 }
 
 * {

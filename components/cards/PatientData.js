@@ -1,17 +1,17 @@
 import styles from '../../styles/cards.module.css';
 
-const PatientData = () => {
+const PatientData = ({ Patient }) => {
   return (
     <>
       <div className={styles.card}>
         <h2>Patient Data</h2>
         <br />
-        <h3>Name: Patient.Name</h3>
-        <h3>Phone: Patient.Phone</h3>
-        <h3>DOB: Patient.DOB</h3>
-        <h3>Gender: Patient.Gender</h3>
-        <h3>Address: Patient.Address</h3>
-        <h3>Allergies: Patient.Allergies</h3>
+        <h3>Name: {Patient.patientsName}</h3>
+        <h3>Phone: {Patient.number}</h3>
+        <h3>DOB: {Patient.dob}</h3>
+        <h3>Gender: {Patient.gender}</h3>
+        <h3>Address: {Patient.address}</h3>
+        <h3>Allergies: {Patient.allergies}</h3>
       </div>
     </>
   );

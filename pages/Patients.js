@@ -23,7 +23,7 @@ export default function Reports() {
       </Head>
       <Navbar />
       {getItem('address') ? <PatientForm /> : <Redirect />}
-      <PatientData />
+      {/* <PatientData /> */}
     </>
   );
 }

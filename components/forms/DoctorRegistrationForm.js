@@ -1,22 +1,25 @@
 import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
+import AddData from '../scripts/AddData.js';
 
 export default function RegistrationForm() {
   const [Data, setData] = useState({
     doctorsID: '',
     speciality: '',
     doctorsName: '',
-    hospitalsName: '',
+    hospital: '',
     gender: '',
   });
 
+  const { addDoctor } = AddData();
+
   const specialityRef = useRef();
   const doctorsNameRef = useRef();
-  const hospitalsNameRef = useRef();
+  const hospitalRef = useRef();
   const doctorsIDRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let data = { ...Data };
@@ -27,10 +30,12 @@ export default function RegistrationForm() {
       data.speciality = specialityRef.current.value.trim();
     if (validateName(doctorsNameRef.current.value.trim()))
       data.doctorsName = doctorsNameRef.current.value.trim();
-    if (validateName(hospitalsNameRef.current.value.trim()))
-      data.hospitalsName = hospitalsNameRef.current.value.trim();
+    if (validateName(hospitalRef.current.value.trim()))
+      data.hospital = hospitalRef.current.value.trim();
     data.gender = gender;
-    setData(data);
+
+    await setData(data);
+    await addDoctor(data);
 
     return true;
   };
@@ -39,6 +44,8 @@ export default function RegistrationForm() {
   const setGender = (e) => {
     gender = e.target.value;
   };
+
+  // * Adding to contract
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -66,7 +73,7 @@ export default function RegistrationForm() {
         type="tel"
         name="doctors-id"
         className="doctors-id"
-        placeholder="Doctor's Number"
+        placeholder="Doctor's ID"
         ref={doctorsIDRef}
       />
       <input
@@ -74,14 +81,14 @@ export default function RegistrationForm() {
         name="hospital"
         className="hospital"
         placeholder="Hospital"
-        ref={hospitalsNameRef}
+        ref={hospitalRef}
       />
       <button type="submit" className={styles.btn}>
         Submit
       </button>
-      <div className={styles.state}>
+      {/* <div className={styles.state}>
         <span>{JSON.stringify(Data)}</span>
-      </div>
+      </div> */}
     </form>
   );
 }

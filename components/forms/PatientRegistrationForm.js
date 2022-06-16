@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { validateID, validateName, validateAddress } from './validations.js';
 import styles from '../../styles/Forms.module.css';
+import AddData from '../scripts/AddData.js';
 
 export default function PatientRegistrationForm() {
   const [Data, setData] = useState({
@@ -8,24 +9,26 @@ export default function PatientRegistrationForm() {
     patientsName: '',
     number: '',
     address: '',
-    allergies: [],
+    allergies: '',
     gender: '',
     dob: '',
   });
 
   const patientsIDRef = useRef();
   const patientsNameRef = useRef();
-  const hospitalsNameRef = useRef();
   const addressRef = useRef();
   const allergiesRef = useRef();
   const dobRef = useRef();
 
-  const handleSubmit = (e) => {
+  const { addPatient } = AddData();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let data = { ...Data };
 
     data.number = patientsIDRef.current.value.replace(/\s+/g, ' ').trim();
+    data.patientsID = patientsIDRef.current.value.replace(/\s+/g, ' ').trim();
     let num = data.number;
     num = `${num}${num.charAt(0)}${num.charAt(1)}`;
 
@@ -36,17 +39,21 @@ export default function PatientRegistrationForm() {
         .trim();
     if (validateAddress(addressRef.current.value.replace(/\s+/g, ' ').trim()))
       data.address = addressRef.current.value.replace(/\s+/g, ' ').trim(); // remove extra spaces
-    let allergies = allergiesRef.current.value.replace(/\s+/g, '').trim(); // remove all spaces
-    if (allergies.length > 3) {
-      allergies = allergies.split(',');
-      let temp = data.allergies.concat(allergies);
-      allergies = [...new Set([...data.allergies, ...allergies])];
-      data.allergies = [...allergies];
-      console.log(allergies);
-    }
-    data.dob = dobRef.current.value;
+    let allergies = allergiesRef.current.value.trim(); // remove all extra spaces
+    data.allergies = allergies;
+    // let allergies = allergiesRef.current.value.replace(/\s+/g, '').trim(); // remove all spaces
+    // if (allergies.length > 3) {
+    //   allergies = allergies.split(',');
+    //   let temp = data.allergies.concat(allergies);
+    //   allergies = [...new Set([...data.allergies, ...allergies])];
+    //   data.allergies = [...allergies];
+    //   console.log(allergies);
+    // }
+    data.dob = String(dobRef.current.value);
     data.gender = gender;
-    setData(data);
+    await setData(data);
+    console.log(JSON.stringify(data));
+    await addPatient(data);
 
     return true;
   };
@@ -98,34 +105,12 @@ export default function PatientRegistrationForm() {
         placeholder="Allergies"
         ref={allergiesRef}
       ></textarea>
-      {/* <input
-        type="number"
-        name="patient-id"
-        className="patient-id"
-        placeholder="Patient ID"
-        ref={patientsIDRef}
-      /> */}
-      {/* <input type="file" id="report" name="report" accept=".pdf" /> */}
-      {/* <input
-        type="text"
-        name="hospital"
-        className="hospital"
-        placeholder="Hospital"
-        ref={hospitalsNameRef}
-      />
-      <input
-        type="text"
-        name="doctor"
-        className="doctor"
-        placeholder="Doctor's Name"
-        ref={doctorsNameRef}
-      /> */}
       <button type="submit" className={styles.btn}>
         Submit
       </button>
-      <div className={styles.state}>
+      {/* <div className={styles.state}>
         <span>{JSON.stringify(Data)}</span>
-      </div>
+      </div> */}
     </form>
   );
 }

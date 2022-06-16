@@ -23,7 +23,7 @@ export default function Doctors() {
       </Head>
       <Navbar />
       {getItem('address') ? <DoctorsForm /> : <Redirect />}
-      <DoctorsData />
+      {/* <DoctorsData /> */}
     </>
   );
 }
