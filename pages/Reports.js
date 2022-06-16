@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar.js';
 import ReportForm from '../components/forms/ReportForm.js';
 import { useRouter } from 'next/router';
 import Redirect from '../components/cards/Redirect.js';
-import Report from '../components/cards/Report.js';
 import useStorage from '../components/hooks/useStorage.js';
 
 export default function Reports() {
@@ -24,7 +23,6 @@ export default function Reports() {
       </Head>
       <Navbar />
       {getItem('address') ? <ReportForm /> : <Redirect />}
-      <Report />
     </>
   );
 }

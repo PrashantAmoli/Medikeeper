@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { validateID } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import PatientData from '../cards/PatientData.js';
+import Report from '../cards/Report.js';
 import GetData from '../scripts/GetData.js';
 
 export default function PatientForm() {
@@ -15,7 +16,7 @@ export default function PatientForm() {
     dob: '',
     allergies: '',
   });
-  const [Report, setReport] = useState({
+  const [Reports, setReports] = useState({
     patientsID: '',
     lastUpdated: '',
     currentMedicalDosage: '',
@@ -54,7 +55,7 @@ export default function PatientForm() {
 
   const handleReport = async (e) => {
     e.preventDefault();
-    const data = { ...Report };
+    const data = { ...Reports };
     const result = await getReport(IDRef.current.value);
     data.lastUpdated = result[0];
     data.currentMedicalDosage = result[1];
@@ -62,7 +63,7 @@ export default function PatientForm() {
     data.diagnosis = result[3];
     data.pdf = `https://dweb.link/ipfs/${result[4]}`;
     data.pdfAll = result[5];
-    await setReport(data);
+    await setReports(data);
   };
 
   return (
@@ -81,13 +82,13 @@ export default function PatientForm() {
           Submit
         </button>
       </form>
-      <h3>{JSON.stringify(Report)}</h3>
+      <Report Data={Reports} />
+      <h3>{JSON.stringify(Reports)}</h3>
       <h3>
-        <a href={Report.pdf} target="_blank">
+        <a href={Reports.pdf} target="_blank">
           View Report
         </a>
       </h3>
-      {/* <PatientData Patient={Patient} /> */}
     </>
   );
 }

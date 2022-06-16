@@ -4,34 +4,32 @@ import useStorage from '../hooks/useStorage.js';
 import styles from '../../styles/cards.module.css';
 
 export default function Metamask() {
-  const [Data, setData] = useState({
-    address: '',
-    balance: '',
-  });
+  const [Address, setAddress] = useState('');
 
   const { setItem, getItem, removeItem } = useStorage();
 
-  useEffect(() => {
-    const address = getItem('address');
-    const balance = getItem('balance');
-    if (getItem('address') && getItem('balance'))
-      setData({
-        address: address,
-        balance: balance,
-      });
-  }, []);
+  // useEffect(() => {
+  //   const address = getItem('address');
+  //   const balance = getItem('balance');
+  //   if (getItem('address') && getItem('balance'))
+  //     setData({
+  //       address: address,
+  //       balance: balance,
+  //     });
+  // }, []);
 
   // Button handler button for handling a request event for metamask
   const handle = () => {
-    // Asking if metamask is already present or not
-    if (window.ethereum) {
-      // res[0] for fetching a first wallet
-      window.ethereum
-        .request({ method: 'eth_requestAccounts' })
-        .then((res) => accountChangeHandler(res[0]));
-    } else {
-      alert('Install Metamask extension on your desktop brower to continue!!!');
-    }
+    // // Asking if metamask is already present or not
+    // if (window.ethereum) {
+    //   // res[0] for fetching a first wallet
+    //   window.ethereum
+    //     .request({ method: 'eth_requestAccounts' })
+    //     .then((res) => accountChangeHandler(res[0]));
+    // } else {
+    //   alert('Install Metamask extension on your desktop brower to continue!!!');
+    // }
+    
   };
 
   // getbalance function for getting a balance in a right format with help of ethers
