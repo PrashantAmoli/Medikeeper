@@ -10,15 +10,36 @@ export default function Metamask() {
   const { load, getCurrentAccount } = GetData();
 
   useEffect(() => {
-    if (getItem('address')) setAddress(getItem('address'));
+    if (getItem('address') && ethereum.isConnected() == false) {
+      console.log(ethereum.isConnected());
+      setAddress(null);
+      removeItem('address');
+    } else if (getItem('address')) setAddress(getItem('address'));
   }, []);
+
+  useEffect(() => {
+    // if (Address != null) setItem('address', Address);
+  }, [Address]);
 
   // Button handler button for handling a request event for metamask
   const handle = async () => {
     await load();
-    const address = await getCurrentAccount();
-    await setAddress(address);
-    await setItem('address', address);
+    const update = async (add) => {
+      const address = await getCurrentAccount();
+      if (address == '' || address == undefined) {
+        return;
+      }
+      setTimeout(() => {
+        setAddress(address);
+        setItem('address', address);
+      }, 1000);
+    };
+    await update(getCurrentAccount());
+  };
+
+  const removeSession = () => {
+    removeItem('address');
+    setAddress(null);
   };
 
   return (
@@ -27,14 +48,15 @@ export default function Metamask() {
         <h2>Metamask</h2>
         {Address == '' || Address == undefined ? (
           <>
-            <button onClick={handle}>Login</button>
+            <button onClick={handle}>Connect</button>
             <h4>Connect using your Metamask account</h4>
           </>
         ) : (
           <>
-            {/* <button onClick={logout}>Logout</button> */}
-            <h4>Address: </h4>
-            <h4>{Address}</h4>
+            <br />
+            <h4>Connected</h4>
+            <br />
+            <button onClick={removeSession}>Reset</button>
           </>
         )}
       </div>
