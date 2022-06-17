@@ -2,8 +2,11 @@ import { useRef, useState } from 'react';
 import { validateID, validateName, validateAddress } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import AddData from '../scripts/AddData.js';
+import Modal from '../cards/Modal';
 
 export default function PatientRegistrationForm() {
+  const [showModal, setShowModal] = useState(false);
+  const [Message, setMessage] = useState('Something went wrong ⁉️ ');
   const [Data, setData] = useState({
     patientsID: '',
     patientsName: '',
@@ -25,21 +28,37 @@ export default function PatientRegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let valid = true;
+    let msg = 'Invalid Input: Please enter valid input values ⁉️  ';
     let data = { ...Data };
 
     data.number = patientsIDRef.current.value.replace(/\s+/g, ' ').trim();
     data.patientsID = patientsIDRef.current.value.replace(/\s+/g, ' ').trim();
     let num = data.number;
-    num = `${num}${num.charAt(0)}${num.charAt(1)}`;
+    // num = `${num}${num.charAt(0)}${num.charAt(1)}`;
 
     if (validateID(num)) data.patientsID = num;
+    else {
+      valid = false;
+      msg = msg + '|  Invalid Number  |';
+    }
     if (validateName(patientsNameRef.current.value.replace(/\s+/g, ' ').trim()))
       data.patientsName = patientsNameRef.current.value
         .replace(/\s+/g, ' ')
         .trim();
+    else {
+      valid = false;
+      msg = msg + '|  Invalid Name  |';
+    }
     if (validateAddress(addressRef.current.value.replace(/\s+/g, ' ').trim()))
-      data.address = addressRef.current.value.replace(/\s+/g, ' ').trim(); // remove extra spaces
-    let allergies = allergiesRef.current.value.trim(); // remove all extra spaces
+      data.address = addressRef.current.value.replace(/\s+/g, ' ').trim();
+    // remove extra spaces
+    else {
+      valid = false;
+      msg = msg + '|  Invalid Address  |';
+    }
+
+    let allergies = allergiesRef.current.value.replace(/\s+/g, ' ').trim(); // remove all extra spaces
     data.allergies = allergies;
     // let allergies = allergiesRef.current.value.replace(/\s+/g, '').trim(); // remove all spaces
     // if (allergies.length > 3) {
@@ -53,6 +72,13 @@ export default function PatientRegistrationForm() {
     data.gender = gender;
     await setData(data);
     console.log(JSON.stringify(data));
+
+    if (valid == false) {
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
+
     await addPatient(data);
 
     return true;
@@ -64,53 +90,64 @@ export default function PatientRegistrationForm() {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="patient-name"
-        className="patient-name"
-        placeholder="Patient's Name"
-        ref={patientsNameRef}
-      />
-      <input
-        type="tel"
-        name="phone-number"
-        className="phone-number"
-        placeholder="Phone Number"
-        ref={patientsIDRef}
-      />
-      <div className={styles.rowForm}>
-        <label htmlFor="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" ref={dobRef} />
-      </div>
-      <div className={styles.rowForm} onChange={setGender}>
-        <label htmlFor="male">Male</label>
-        <input type="radio" id="male" name="gender" value="Male" />
-        <label htmlFor="female">Female</label>
-        <input type="radio" id="female" name="gender" value="Female" />
-      </div>
-      <textarea
-        name="patients-address"
-        id="patients-address"
-        cols="20"
-        rows="4"
-        placeholder="Address"
-        ref={addressRef}
-      ></textarea>
-      <textarea
-        name="allergies"
-        id="allergies"
-        cols="20"
-        rows="4"
-        placeholder="Allergies"
-        ref={allergiesRef}
-      ></textarea>
-      <button type="submit" className={styles.btn}>
-        Submit
-      </button>
-      {/* <div className={styles.state}>
+    <>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="patient-name"
+          className="patient-name"
+          placeholder="Patient's Name"
+          ref={patientsNameRef}
+        />
+        <input
+          type="tel"
+          name="phone-number"
+          className="phone-number"
+          placeholder="Phone Number"
+          ref={patientsIDRef}
+        />
+        <div className={styles.rowForm}>
+          <label htmlFor="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" ref={dobRef} />
+        </div>
+        <div className={styles.rowForm} onChange={setGender}>
+          <label htmlFor="male">Male</label>
+          <input type="radio" id="male" name="gender" value="Male" checked />
+          <label htmlFor="female">Female</label>
+          <input type="radio" id="female" name="gender" value="Female" />
+        </div>
+        <textarea
+          name="patients-address"
+          id="patients-address"
+          cols="20"
+          rows="4"
+          placeholder="Address"
+          ref={addressRef}
+        ></textarea>
+        <textarea
+          name="allergies"
+          id="allergies"
+          cols="20"
+          rows="4"
+          placeholder="Allergies"
+          ref={allergiesRef}
+        ></textarea>
+        <button type="submit" className={styles.btn}>
+          Submit
+        </button>
+        {/* <div className={styles.state}>
         <span>{JSON.stringify(Data)}</span>
       </div> */}
-    </form>
+      </form>
+
+      <section>
+        {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)} show={showModal}>
+            {Message}
+          </Modal>
+        )}
+      </section>
+    </>
   );
 }
