@@ -18,7 +18,7 @@ export default function Home() {
         <Welcome />
       </div>
       <div>
-        <button onClick={() => setShowModal(true)}>Open Modal</button>
+        {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
             Hello from the modal!
@@ -29,4 +29,3 @@ export default function Home() {
     </>
   );
 }
-//

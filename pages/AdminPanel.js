@@ -21,6 +21,18 @@ const AdminPanel = () => {
     return true;
   };
 
+  const add = async (e) => {
+    e.preventDefault();
+    await addAuthentication(addressRef.current.value);
+    return true;
+  };
+
+  const remove = async (e) => {
+    e.preventDefault();
+    await removeAuthentication(addressRef.current.value);
+    return true;
+  };
+
   useEffect(() => {
     setTimeout(() => {
       if (!getItem('address')) router.push('/');
@@ -44,18 +56,10 @@ const AdminPanel = () => {
           />
 
           <div className={cardStyles.row}>
-            <button
-              type="submit"
-              className={styles.btn}
-              onClick={() => addAuthentication(addressRef.current.value)}
-            >
+            <button type="submit" className={styles.btn} onClick={add}>
               Authorize
             </button>
-            <button
-              type="submit"
-              className={styles.btn}
-              onClick={() => removeAuthentication(addressRef.current.value)}
-            >
+            <button type="submit" className={styles.btn} onClick={remove}>
               Unauthorize
             </button>
           </div>

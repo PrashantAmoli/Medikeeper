@@ -5,9 +5,12 @@ import PatientData from '../cards/PatientData.js';
 import DoctorsData from '../cards/DoctorsData.js';
 import Report from '../cards/Report.js';
 import GetData from '../scripts/GetData.js';
+import Modal from '../cards/Modal';
 
 export default function ReportDataForm() {
   const [ID, setID] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [Message, setMessage] = useState('Something went wrong ⁉️ ');
 
   const [Patient, setPatient] = useState({
     patientsID: '',
@@ -55,7 +58,11 @@ export default function ReportDataForm() {
     data.gender = result[2];
     data.address = result[3];
     data.dob = result[4];
-    data.allergies = result[5];
+    let allergies = result[5];
+
+    for (let i = 11; i < allergies.length; i++) {
+      data.allergies += allergies[i];
+    }
 
     await setPatient(data);
   };
@@ -74,6 +81,13 @@ export default function ReportDataForm() {
 
   const handleReport = async (e) => {
     e.preventDefault();
+
+    let msg = 'Invalid Input: Please enter valid ID ⁉️  ';
+    if (!validateID(IDRef.current.value)) {
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
     const data = { ...Reports };
     const result = await getReport(IDRef.current.value);
     data.lastUpdated = result[0];

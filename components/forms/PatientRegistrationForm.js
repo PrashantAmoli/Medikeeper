@@ -61,7 +61,7 @@ export default function PatientRegistrationForm() {
     let allergies = allergiesRef.current.value.replace(/\s+/g, ' ').trim(); // remove all extra spaces
     data.allergies = allergies;
     // let allergies = allergiesRef.current.value.replace(/\s+/g, '').trim(); // remove all spaces
-    // if (allergies.length > 3) {
+    // if (allergies.length > 3) { 
     //   allergies = allergies.split(',');
     //   let temp = data.allergies.concat(allergies);
     //   allergies = [...new Set([...data.allergies, ...allergies])];
