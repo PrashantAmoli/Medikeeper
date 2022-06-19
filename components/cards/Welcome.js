@@ -6,11 +6,11 @@ export default function Welcome() {
       <div>
         <h5>
           Too often our health must take the back seat for what really is
-          important, 
+          important,
         </h5>
         <h5>
-          it is only when you lose your health that you realise how
-          important it is.
+          it is only when you lose your health that you realise how important it
+          is.
         </h5>
         <h5>
           We are in the business of getting people's health back and teaching

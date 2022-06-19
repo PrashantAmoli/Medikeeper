@@ -2,8 +2,12 @@ import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import AddData from '../scripts/AddData.js';
+import Modal from '../cards/Modal';
 
 export default function ReportForm() {
+  const [showModal, setShowModal] = useState(false);
+  const [Message, setMessage] = useState('Something went wrong ⁉️ ');
+
   const [Data, setData] = useState({
     patientsID: '',
     lastUpdated: '',
@@ -24,23 +28,54 @@ export default function ReportForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let valid = true;
+    let msg = 'Invalid Input: Please enter valid input values ⁉️  ';
     let data = { ...Data };
 
     if (validateID(patientsIDRef.current.value.trim()))
       data.patientsID = patientsIDRef.current.value;
-
+    else {
+      valid = false;
+      msg = msg + "   Invalid Patient's ID   |";
+    }
     if (validateID(doctorsIDRef.current.value.trim()))
       data.updatedBy = doctorsIDRef.current.value;
+    else {
+      valid = false;
+      msg = msg + "   Invalid Doctor's ID  |";
+    }
 
     if (validateName(diagnosisRef.current.value.trim()))
       data.diagnosis = diagnosisRef.current.value;
+    else {
+      valid = false;
+      msg = msg + '   Invalid Diagnosis  |';
+    }
 
     if (validateName(prescriptionRef.current.value.trim()))
       data.currentMedicalDosage = prescriptionRef.current.value;
+    else {
+      valid = false;
+      msg = msg + '   Invalid Prescription  |';
+    }
 
     data.lastUpdated = String(dobRef.current.value);
+    if (
+      data.lastUpdated == null ||
+      data.lastUpdated == undefined ||
+      data.lastUpdated == ''
+    ) {
+      valid = false;
+      msg = msg + '   Invalid Date  |';
+    }
     data.pdf = 'bafybeifynkhsnf63nsriir56zdox3fa5o62hejotpj3zzpemzztceiqauy';
     await setData(data);
+
+    if (valid == false) {
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
 
     await addRecord(data);
 
@@ -65,7 +100,7 @@ export default function ReportForm() {
           ref={patientsIDRef}
         />
         <div className={styles.rowForm}>
-          <label htmlFor="dob">Date:</label>
+          <label htmlFor="dob">Updated on: </label>
           <input type="date" id="dob" name="dob" ref={dobRef} />
         </div>
         <div className={styles.rowForm}>
@@ -95,6 +130,14 @@ export default function ReportForm() {
           <span>{JSON.stringify(Data)}</span>
         </div> */}
       </form>
+      <section>
+        {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)} show={showModal}>
+            {Message}
+          </Modal>
+        )}
+      </section>
     </>
   );
 }

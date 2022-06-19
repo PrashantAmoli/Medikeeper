@@ -27,6 +27,13 @@ body {
   background-color: var(--bg); */
   margin: 0;
   padding: 0;
+
+  max-width: 100%;
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  white-space: normal !important;
 }
 
 .emptyBlock {
@@ -232,8 +239,11 @@ body {
   left: 2px;
   border-radius: 50%;
   transition: transform 0.2s linear;
+  cursor: grab;
 }
-
+.ball:hover {
+  box-shadow: 0 1px 14px 1px #aaa;
+}
 /*  target the elemenent after the label*/
 .checkbox:checked + .label .ball {
   transform: translateX(24px);
