@@ -96,7 +96,7 @@ export default function Navbar() {
             </li>
           </ul>
           <h1 className="logo">
-            <Link href="/random">
+            <Link href="/">
               <a>Medikeeper</a>
             </Link>
           </h1>
