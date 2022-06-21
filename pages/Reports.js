@@ -5,13 +5,13 @@ import ReportForm from '../components/forms/ReportForm.js';
 import ReportDataForm from '../components/forms/ReportDataForm.js';
 import { useRouter } from 'next/router';
 import Redirect from '../components/cards/Redirect.js';
-import useStorage from '../components/hooks/useStorage.js';
+import useSession from '../components/hooks/useSession.js';
 import styles from '../styles/cards.module.css';
 
 export default function Reports() {
   const [Form, setForm] = useState(true);
   const router = useRouter();
-  const { getItem } = useStorage();
+  const { getItem } = useSession();
 
   const AddForm = () => setForm(true);
   const GetForm = () => setForm(false);

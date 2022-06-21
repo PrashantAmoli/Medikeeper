@@ -1,12 +1,15 @@
 import { useRef, useState } from 'react';
-import { validateID, validateName } from './validations.js';
+import { validateID, validateName, validateFile } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import AddData from '../scripts/AddData.js';
 import Modal from '../cards/Modal';
+import useStorage from '../hooks/useStorage';
 
 export default function ReportForm() {
   const [showModal, setShowModal] = useState(false);
   const [Message, setMessage] = useState('Something went wrong ⁉️ ');
+
+  const { uploadFile } = useStorage();
 
   const [Data, setData] = useState({
     patientsID: '',
@@ -22,6 +25,7 @@ export default function ReportForm() {
   const diagnosisRef = useRef();
   const prescriptionRef = useRef();
   const dobRef = useRef();
+  const fileRef = useRef();
 
   const { addRecord } = AddData();
 
@@ -68,16 +72,32 @@ export default function ReportForm() {
       valid = false;
       msg = msg + '   Invalid Date  |';
     }
-    data.pdf = 'bafybeifynkhsnf63nsriir56zdox3fa5o62hejotpj3zzpemzztceiqauy';
+
+    const file = fileRef.current.value;
+    if (!validateFile(file)) {
+      msg = msg + '   Invalid file  |';
+    } else {
+      const cid = await uploadFile(fileRef.current);
+      data.pdf = `https://dweb.link/ipfs/${cid}`;
+    }
+
+    // data.pdf = 'bafybeifynkhsnf63nsriir56zdox3fa5o62hejotpj3zzpemzztceiqauy';
     await setData(data);
 
     if (valid == false) {
       await setMessage(msg);
       await setShowModal(true);
       return;
+    } else {
+      msg = `Uploading data to Ethereum Blockchain will take a minute. 
+      Please wait...`;
+      await setMessage(msg);
+      await setShowModal(true);
     }
 
     await addRecord(data);
+    await setMessage(`Data uploaded on Ethereum Blockchain`);
+    setShowModal(false);
 
     return true;
   };
@@ -104,7 +124,13 @@ export default function ReportForm() {
           <input type="date" id="dob" name="dob" ref={dobRef} />
         </div>
         <div className={styles.rowForm}>
-          <input type="file" id="report" name="report" accept=".pdf" />
+          <input
+            type="file"
+            id="report"
+            name="report"
+            accept=".pdf"
+            ref={fileRef}
+          />
         </div>
         <textarea
           name="diagnosis"

@@ -94,7 +94,7 @@ export default function ReportDataForm() {
     data.currentMedicalDosage = result[1];
     data.updatedBy = result[2];
     data.diagnosis = result[3];
-    data.pdf = `https://dweb.link/ipfs/${result[4]}`;
+    data.pdf = result[4];
     data.pdfAll = result[5];
     await setReports(data);
 

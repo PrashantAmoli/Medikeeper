@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import useStorage from '../hooks/useStorage.js';
+import useSession from '../hooks/useSession.js';
 import styles from '../../styles/cards.module.css';
 import GetData from './GetData.js';
 
 export default function Metamask() {
   const [Address, setAddress] = useState('');
 
-  const { setItem, getItem, removeItem } = useStorage();
+  const { setItem, getItem, removeItem } = useSession();
   const { load, getCurrentAccount } = GetData();
 
   useEffect(() => {

@@ -5,13 +5,13 @@ import cardStyles from '../styles/cards.module.css';
 import Admin from '../components/scripts/Admin.js';
 import Navbar from '../components/Navbar.js';
 import Redirect from '../components/cards/Redirect.js';
-import useStorage from '../components/hooks/useStorage.js';
+import useSession from '../components/hooks/useSession.js';
 import { useRouter } from 'next/router';
 
 const AdminPanel = () => {
   const [Address, setAddress] = useState('');
   const { addAuthentication, removeAuthentication } = Admin();
-  const { getItem } = useStorage();
+  const { getItem } = useSession();
 
   const addressRef = useRef();
   const router = useRouter();

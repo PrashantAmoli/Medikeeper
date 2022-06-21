@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import Link from 'next/link';
-import useStorage from './hooks/useStorage.js';
+import useSession from './hooks/useSession.js';
 
 export default function Navbar() {
   const checked = useRef();
 
-  const { getItem, setItem, removeItem } = useStorage();
+  const { getItem, setItem, removeItem } = useSession();
 
   let theme = {
     font: '',

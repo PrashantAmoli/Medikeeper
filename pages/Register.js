@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar.js';
 import PatientRegistrationForm from '../components/forms/PatientRegistrationForm.js';
 import DoctorRegistrationForm from '../components/forms/DoctorRegistrationForm.js';
 import Redirect from '../components/cards/Redirect.js';
-import useStorage from '../components/hooks/useStorage.js';
+import useSession from '../components/hooks/useSession.js';
 import { useRouter } from 'next/router';
 import styles from '../styles/cards.module.css';
 
@@ -12,7 +12,7 @@ export default function Register() {
   const [Form, setForm] = useState(true);
 
   const router = useRouter();
-  const { getItem } = useStorage();
+  const { getItem } = useSession();
 
   useEffect(() => {
     setTimeout(() => {
