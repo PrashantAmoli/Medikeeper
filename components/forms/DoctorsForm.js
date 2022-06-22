@@ -46,6 +46,14 @@ export default function DoctorsForm() {
     doctor.speciality = resData[1];
     doctor.hospital = resData[2];
     doctor.gender = resData[3];
+
+    if (doctor.doctorsName == '' || doctor.doctorsName == undefined) {
+      msg = `No Doctor exists with patient id: ${IDRef.current.value}⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
+
     await setDoctor(doctor);
     return true;
   };

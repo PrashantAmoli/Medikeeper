@@ -51,6 +51,13 @@ export default function PatientForm() {
     data.dob = result[4];
     let allergies = result[5];
 
+    if (data.patientsName == '' || data.patientsName == undefined) {
+      msg = `No patient exists with patient id ${IDRef.current.value} ⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
+
     for (let i = 11; i < allergies.length; i++) {
       data.allergies += allergies[i];
     }

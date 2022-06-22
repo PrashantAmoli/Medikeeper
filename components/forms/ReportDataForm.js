@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { validateID } from './validations.js';
 import styles from '../../styles/Forms.module.css';
+import cardStyles from '../../styles/cards.module.css';
 import PatientData from '../cards/PatientData.js';
 import DoctorsData from '../cards/DoctorsData.js';
 import Report from '../cards/Report.js';
@@ -45,10 +46,6 @@ export default function ReportDataForm() {
   const { getPatient, getReport, getDoctor } = GetData();
 
   const getPatientData = async () => {
-    // e.preventDefault();
-    // if (!validateID(IDRef.current.value.trim())) return false;
-    // await setID(IDRef.current.value.trim());
-
     const result = await getPatient(IDRef.current.value);
 
     const data = { ...Patient };
@@ -59,6 +56,13 @@ export default function ReportDataForm() {
     data.address = result[3];
     data.dob = result[4];
     let allergies = result[5];
+
+    if (data.patientsName == '' || data.patientsName == undefined) {
+      let msg = `No patient exists with patient id ${IDRef.current.value} ⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
 
     for (let i = 11; i < allergies.length; i++) {
       data.allergies += allergies[i];
@@ -76,6 +80,13 @@ export default function ReportDataForm() {
     doctor.speciality = result[1];
     doctor.hospital = result[2];
     doctor.gender = result[3];
+
+    if (doctor.doctorsName == '' || doctor.doctorsName == undefined) {
+      let msg = `No Doctor exists with patient id: ${IDRef.current.value}⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
     await setDoctor(doctor);
   };
 
@@ -88,17 +99,35 @@ export default function ReportDataForm() {
       await setShowModal(true);
       return;
     }
+
+    await getPatientData();
+
     const data = { ...Reports };
     const result = await getReport(IDRef.current.value);
+    data.patientsID = IDRef.current.value;
     data.lastUpdated = result[0];
     data.currentMedicalDosage = result[1];
     data.updatedBy = result[2];
     data.diagnosis = result[3];
     data.pdf = result[4];
     data.pdfAll = result[5];
+
+    console.log('Result => ', JSON.stringify(data));
+    if (
+      data.pdf == '' ||
+      data.pdf == undefined ||
+      data.updatedBy == '' ||
+      data.updatedBy == undefined
+    ) {
+      msg = `No report uploaded for patient ${Patient.patientsName} with id: ${IDRef.current.value}⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
+
+    console.log(data.pdfAll);
     await setReports(data);
 
-    await getPatientData();
     await getDoctorData(data.updatedBy);
   };
 
@@ -114,6 +143,15 @@ export default function ReportDataForm() {
       <DoctorsData Doctor={Doctor} />
       <PatientData Patient={Patient} />
       <Report Data={Reports} />
+
+      <section>
+        {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)} show={showModal}>
+            {Message}
+          </Modal>
+        )}
+      </section>
     </>
   );
 }
