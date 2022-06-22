@@ -44,21 +44,28 @@ export default function Metamask() {
 
   return (
     <>
-      <div className={styles.card}>
-        <h2>Metamask</h2>
+      <div className={styles.card} style={{ alignItems: 'center' }}>
+        <h2 className={styles.head}>Metamask</h2>
         {Address == '' || Address == undefined ? (
           <>
             <button onClick={handle}>Connect</button>
-            <h4>Connect using your Metamask account</h4>
+            <span className={styles.head}>
+              Connect using your Metamask account on Goerli Network
+            </span>
           </>
         ) : (
           <>
             <br />
-            <h4>Connected</h4>
+            <h4 className={styles.head}>Connected</h4>
             <br />
             <button onClick={removeSession}>Reset</button>
           </>
         )}
+        <img
+          src="https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif"
+          alt="Metamask"
+          width="400"
+        />
       </div>
     </>
   );

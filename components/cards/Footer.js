@@ -1,11 +1,20 @@
+import styles from '../../styles/cards.module.css';
+
 const Footer = () => {
+  const link = `https://PrashantAmoli.gitub.io`;
   return (
     <>
-      <footer>
-        <h2>
-          Developed using React JS, Next JS, Solidity smart contracts developed
-          on Ethereum blockchain and deployed on Goerli network.
-        </h2>
+      <footer className={styles.footer}>
+        <span className={styles.head}>
+          Developed by{' '}
+          <a
+            href={link}
+            style={{ textDecoration: 'none', color: 'var(--color)' }}
+          >
+            Prashant Amoli
+          </a>{' '}
+          and deployed on Vercel and Goerli Network.
+        </span>
       </footer>
     </>
   );

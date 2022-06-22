@@ -16,6 +16,7 @@ export default function Welcome() {
           We are in the business of getting people's health back and teaching
           them how to stay healthy.
         </h5>
+        <img href="https://www.verizon.com/about/sites/default/files/2020-10/transparency-hero-gif-1272x477_0.gif" />
       </div>
     </>
   );

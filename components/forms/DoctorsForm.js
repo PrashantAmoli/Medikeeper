@@ -69,6 +69,17 @@ export default function DoctorsForm() {
       </form>
       <DoctorsData Doctor={Doctor} />
 
+      {Doctor.doctorsName ? (
+        <div className={styles.form} style={{ boxShadow: 'none' }}>
+          <img
+            src="https://c.tenor.com/nYCc0GbYYp8AAAAC/healthy-doctor.gif"
+            alt="Doctor"
+          />
+        </div>
+      ) : (
+        <></>
+      )}
+
       <section>
         {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
         {showModal && (

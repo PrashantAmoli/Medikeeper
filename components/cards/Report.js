@@ -40,6 +40,11 @@ const Report = ({ Data }) => {
             </>
           );
         })}
+        {Reports.length > 0 ? (
+          <img href="https://thumbs.dreamstime.com/z/happy-cartoon-doctor-showing-medical-report-vector-happy-cartoon-doctor-showing-medical-report-vector-142325048.jpg" />
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

@@ -77,6 +77,17 @@ export default function PatientForm() {
       </form>
       <PatientData Patient={Patient} />
 
+      {Patient.dob ? (
+        <div className={styles.form} style={{ boxShadow: 'none' }}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Patient_Care_GIF_Animation_Loop.gif"
+            alt="Doctor"
+          />
+        </div>
+      ) : (
+        <></>
+      )}
+
       <section>
         {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
         {showModal && (
