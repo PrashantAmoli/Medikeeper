@@ -118,7 +118,6 @@ const GetData = () => {
       }
     );
     // lastUpdated, medicalDosage, UpdatedBy, diagnosis, PDF, allPDF
-    console.log(JSON.stringify(result), result);
     return result;
   };
 

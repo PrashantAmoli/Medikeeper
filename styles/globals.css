@@ -3,6 +3,7 @@
 :root {
   --bg: black;
   --font: white;
+  --hover: red;
 }
 
 html,
@@ -41,6 +42,10 @@ body {
   height: 6rem;
 }
 
+img {
+  border-radius: 1.5rem;
+  margin: 1rem;
+}
 /* Navbar */
 .navbar input[type='checkbox'],
 .navbar .hamburger-lines {
@@ -93,7 +98,7 @@ body {
 }
 
 .navbar a:hover {
-  color: var(--font);
+  color: var(--hover);
   cursor: pointer;
 }
 
@@ -250,11 +255,13 @@ body {
 }
 
 .fa-moon {
-  color: pink;
+  color: rgba(156, 145, 124, 0.82);
+  text-shadow: 0 0 3px #aaa;
 }
 
 .fa-sun {
   color: yellow;
+  text-shadow: 0 0 2px yellow;
 }
 /* Navbar End*/
 
@@ -282,7 +289,7 @@ button {
 }
 button:hover {
   font-weight: bold;
-  color: red;
+  color: var(--hover);
   border: 2px outset;
   /* box-shadow: inset 0px 1px 14px 1px #aaa; */
 }

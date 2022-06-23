@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import useStorage from '../hooks/useStorage.js';
+import useSession from '../hooks/useSession.js';
 import styles from '../../styles/cards.module.css';
 import GetData from './GetData.js';
 
 export default function Metamask() {
   const [Address, setAddress] = useState('');
 
-  const { setItem, getItem, removeItem } = useStorage();
+  const { setItem, getItem, removeItem } = useSession();
   const { load, getCurrentAccount } = GetData();
 
   useEffect(() => {
@@ -44,21 +44,28 @@ export default function Metamask() {
 
   return (
     <>
-      <div className={styles.card}>
-        <h2>Metamask</h2>
+      <div className={styles.card} style={{ alignItems: 'center' }}>
+        <h2 className={styles.head}>Metamask</h2>
         {Address == '' || Address == undefined ? (
           <>
             <button onClick={handle}>Connect</button>
-            <h4>Connect using your Metamask account</h4>
+            <span className={styles.head}>
+              Connect using your Metamask account on Goerli Network
+            </span>
           </>
         ) : (
           <>
             <br />
-            <h4>Connected</h4>
+            <h4 className={styles.head}>Connected</h4>
             <br />
             <button onClick={removeSession}>Reset</button>
           </>
         )}
+        <img
+          src="https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif"
+          alt="Metamask"
+          width="400"
+        />
       </div>
     </>
   );

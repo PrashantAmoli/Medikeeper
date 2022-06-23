@@ -14,3 +14,21 @@ export const validateID = (ID) => {
   if (!isnum) return false;
   return true;
 };
+
+export const validateFile = (filePath) => {
+  // var fileInput =
+  //     document.getElementById('file');
+
+  // var filePath = fileInput.value;
+
+  // Allowing file type
+  var allowedExtensions = /(\.doc|\.docx|\.odt|\.pdf|)$/i;
+
+  if (!allowedExtensions.exec(filePath)) {
+    alert('Invalid file type');
+    // fileInput.value = '';
+    return false;
+  }
+
+  return true;
+};

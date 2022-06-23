@@ -2,28 +2,37 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar.js';
 import PatientForm from '../components/forms/PatientForm.js';
 import Redirect from '../components/cards/Redirect.js';
-import useStorage from '../components/hooks/useStorage.js';
+import useSession from '../components/hooks/useSession.js';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import PatientData from '../components/cards/PatientData.js';
 
 export default function Reports() {
   const router = useRouter();
-  const { getItem } = useStorage();
+  const { getItem } = useSession();
+
+  let pointerEvent = 'none';
 
   useEffect(() => {
     setTimeout(() => {
-      if (!getItem('address')) router.push('/');
-    }, 3000);
+      if (!getItem('address')) {
+        pointerEvent = 'none';
+        router.push('/');
+      } else {
+        pointerEvent = 'all';
+      }
+    }, 5000);
   }, []);
+
   return (
     <>
       <Head>
         <title>Patients </title>
       </Head>
       <Navbar />
-      {getItem('address') ? <PatientForm /> : <Redirect />}
-      {/* <PatientData /> */}
+      {getItem('address') ? <></> : <Redirect />}
+      <section style={{ PointerEvents: `${pointerEvent}` }}>
+        <PatientForm />
+      </section>
     </>
   );
 }

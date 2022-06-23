@@ -4,7 +4,9 @@ export default function Redirect() {
   return (
     <>
       <div className={styles.card}>
-        <h2> Login with your Metamask account to continue...</h2>
+        <h3 className={styles.head}>
+          Login with your Metamask account over Goerli Network to continue...
+        </h3>
       </div>
     </>
   );

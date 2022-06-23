@@ -46,6 +46,14 @@ export default function DoctorsForm() {
     doctor.speciality = resData[1];
     doctor.hospital = resData[2];
     doctor.gender = resData[3];
+
+    if (doctor.doctorsName == '' || doctor.doctorsName == undefined) {
+      msg = `No Doctor exists with id: ${IDRef.current.value}⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
+
     await setDoctor(doctor);
     return true;
   };
@@ -60,6 +68,17 @@ export default function DoctorsForm() {
         </button>
       </form>
       <DoctorsData Doctor={Doctor} />
+
+      {Doctor.doctorsName ? (
+        <div className={styles.form} style={{ boxShadow: 'none' }}>
+          <img
+            src="https://c.tenor.com/nYCc0GbYYp8AAAAC/healthy-doctor.gif"
+            alt="Doctor"
+          />
+        </div>
+      ) : (
+        <></>
+      )}
 
       <section>
         {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}

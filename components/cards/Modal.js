@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import useStorage from '../hooks/useStorage';
+import useSession from '../hooks/useSession';
 
 const Modal = ({ onClose, children, title }) => {
   const [isBrowser, setIsBrowser] = useState(false);
@@ -13,7 +13,7 @@ const Modal = ({ onClose, children, title }) => {
   // create ref for the StyledModalWrapper component
   const modalWrapperRef = React.useRef();
 
-  const { getItem } = useStorage();
+  const { getItem } = useSession();
 
   // check if the user has clickedinside or outside the modal
   const backDropHandler = (e) => {

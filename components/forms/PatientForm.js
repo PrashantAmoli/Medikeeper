@@ -34,7 +34,6 @@ export default function PatientForm() {
     }
     await setID(IDRef.current.value.trim());
 
-    console.log('Patient from state: ', JSON.stringify(data));
     if (valid == false) {
       await setMessage(msg);
       await setShowModal(true);
@@ -50,6 +49,13 @@ export default function PatientForm() {
     data.address = result[3];
     data.dob = result[4];
     let allergies = result[5];
+
+    if (data.patientsName == '' || data.patientsName == undefined) {
+      msg = `No patient exists with patient id ${IDRef.current.value} ⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
 
     for (let i = 11; i < allergies.length; i++) {
       data.allergies += allergies[i];
@@ -69,6 +75,17 @@ export default function PatientForm() {
         </button>
       </form>
       <PatientData Patient={Patient} />
+
+      {Patient.dob ? (
+        <div className={styles.form} style={{ boxShadow: 'none' }}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Patient_Care_GIF_Animation_Loop.gif"
+            alt="Doctor"
+          />
+        </div>
+      ) : (
+        <></>
+      )}
 
       <section>
         {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
