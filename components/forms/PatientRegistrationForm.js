@@ -61,7 +61,7 @@ export default function PatientRegistrationForm() {
     let allergies = allergiesRef.current.value.replace(/\s+/g, ' ').trim(); // remove all extra spaces
     data.allergies = allergies;
     // let allergies = allergiesRef.current.value.replace(/\s+/g, '').trim(); // remove all spaces
-    // if (allergies.length > 3) { 
+    // if (allergies.length > 3) {
     //   allergies = allergies.split(',');
     //   let temp = data.allergies.concat(allergies);
     //   allergies = [...new Set([...data.allergies, ...allergies])];
@@ -112,7 +112,7 @@ export default function PatientRegistrationForm() {
         </div>
         <div className={styles.rowForm} onChange={setGender}>
           <label htmlFor="male">Male</label>
-          <input type="radio" id="male" name="gender" value="Male" checked />
+          <input type="radio" id="male" name="gender" value="Male" selected />
           <label htmlFor="female">Female</label>
           <input type="radio" id="female" name="gender" value="Female" />
         </div>
