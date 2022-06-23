@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Head>
         <title>Home</title>
-        <link rel="icon" href="/static/fa"
+        <link rel="icon" href="/static/favicon-16x16.png" />
       </Head>
       <Navbar />
       <div className={styles.container}>
