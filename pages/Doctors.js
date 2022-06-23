@@ -9,10 +9,16 @@ import { useRouter } from 'next/router';
 export default function Doctors() {
   const router = useRouter();
   const { getItem } = useSession();
+  let pointerEvent = 'none';
 
   useEffect(() => {
     setTimeout(() => {
-      if (!getItem('address')) router.push('/');
+      if (!getItem('address')) {
+        pointerEvent = 'none';
+        router.push('/');
+      } else {
+        pointerEvent = 'all';
+      }
     }, 3000);
   }, []);
   return (
@@ -21,8 +27,10 @@ export default function Doctors() {
         <title>Doctors</title>
       </Head>
       <Navbar />
-      {getItem('address') ? <DoctorsForm /> : <Redirect />}
-      {/* <DoctorsData /> */}
+      {getItem('address') ? <></> : <Redirect />}
+      <section style={{ PointerEvents: `${pointerEvent}` }}>
+        <DoctorsForm />
+      </section>
     </>
   );
 }

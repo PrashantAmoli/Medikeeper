@@ -10,18 +10,29 @@ export default function Reports() {
   const router = useRouter();
   const { getItem } = useSession();
 
+  let pointerEvent = 'none';
+
   useEffect(() => {
     setTimeout(() => {
-      if (!getItem('address')) router.push('/');
+      if (!getItem('address')) {
+        pointerEvent = 'none';
+        router.push('/');
+      } else {
+        pointerEvent = 'all';
+      }
     }, 3000);
   }, []);
+
   return (
     <>
       <Head>
         <title>Patients </title>
       </Head>
       <Navbar />
-      {getItem('address') ? <PatientForm /> : <Redirect />}
+      {getItem('address') ? <></> : <Redirect />}
+      <section style={{ PointerEvents: `${pointerEvent}` }}>
+        <PatientForm />
+      </section>
     </>
   );
 }

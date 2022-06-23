@@ -15,10 +15,16 @@ export default function Reports() {
 
   const AddForm = () => setForm(true);
   const GetForm = () => setForm(false);
+  let pointerEvent = 'none';
 
   useEffect(() => {
     setTimeout(() => {
-      if (!getItem('address')) router.push('/');
+      if (!getItem('address')) {
+        pointerEvent = 'none';
+        router.push('/');
+      } else {
+        pointerEvent = 'all';
+      }
     }, 3000);
   }, []);
 
@@ -38,11 +44,11 @@ export default function Reports() {
         </div>
       </div>
 
-      {getItem('address') ? (
-        <>{Form === true ? <ReportForm /> : <ReportDataForm />}</>
-      ) : (
-        <Redirect />
-      )}
+      {getItem('address') ? <></> : <Redirect />}
+
+      <section style={{ PointerEvents: `${pointerEvent}` }}>
+        {Form === true ? <ReportForm /> : <ReportDataForm />}
+      </section>
     </>
   );
 }

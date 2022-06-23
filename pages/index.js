@@ -9,25 +9,21 @@ import { useState } from 'react';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       <Head>
         <title>Home</title>
-        <link rel="icon" href="/static/favicon.ico" />
       </Head>
+
       <Navbar />
+
       <div className={styles.container}>
         <Welcome />
       </div>
-      <div>
-        {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
-        {showModal && (
-          <Modal onClose={() => setShowModal(false)} show={showModal}>
-            Hello from the modal!
-          </Modal>
-        )}
-      </div>
+
       <Metamask />
+
       <Footer />
     </>
   );
