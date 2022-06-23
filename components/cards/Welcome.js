@@ -7,19 +7,23 @@ export default function Welcome() {
         <h1 className={styles.head}>Welcome to Medikeeper</h1>
         <h3 className={styles.head}>Blockchain based medical record storage</h3>
         <br />
-        <h5 className={styles.head}>
+        <p>
           Too often our health must take the back seat for what really is
           important,
-        </h5>
-        <h5 className={styles.head}>
+        </p>
+        <p>
           it is only when you lose your health that you realise how important it
           is.
-        </h5>
-        <h5 className={styles.head}>
+        </p>
+        <p>
           We are in the business of getting people's health back and teaching
           them how to stay healthy.
-        </h5>
-        <img href="https://www.verizon.com/about/sites/default/files/2020-10/transparency-hero-gif-1272x477_0.gif" />
+        </p>
+        <p>
+          We provide a secure reporsitory on Ethereum Blockchain to stores your
+          medical records
+        </p>
+        <img href="https://i.gifer.com/74pZ.gif" />
       </div>
     </>
   );
