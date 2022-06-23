@@ -34,7 +34,6 @@ export default function PatientForm() {
     }
     await setID(IDRef.current.value.trim());
 
-    console.log('Patient from state: ', JSON.stringify(data));
     if (valid == false) {
       await setMessage(msg);
       await setShowModal(true);

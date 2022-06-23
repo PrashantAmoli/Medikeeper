@@ -112,7 +112,6 @@ export default function ReportDataForm() {
     data.pdf = result[4];
     data.pdfAll = result[5];
 
-    console.log('Result => ', JSON.stringify(data));
     if (
       data.pdf == '' ||
       data.pdf == undefined ||

@@ -48,7 +48,7 @@ export default function DoctorsForm() {
     doctor.gender = resData[3];
 
     if (doctor.doctorsName == '' || doctor.doctorsName == undefined) {
-      msg = `No Doctor exists with patient id: ${IDRef.current.value}⁉️`;
+      msg = `No Doctor exists with id: ${IDRef.current.value}⁉️`;
       await setMessage(msg);
       await setShowModal(true);
       return;
