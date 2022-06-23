@@ -19,7 +19,7 @@ export default function Doctors() {
       } else {
         pointerEvent = 'all';
       }
-    }, 3000);
+    }, 5000);
   }, []);
   return (
     <>

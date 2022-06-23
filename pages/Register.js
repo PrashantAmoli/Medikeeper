@@ -23,7 +23,7 @@ export default function Register() {
       } else {
         pointerEvent = 'all';
       }
-    }, 3000);
+    }, 5000);
   }, []);
 
   const patientForm = () => setForm(true);

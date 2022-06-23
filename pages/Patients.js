@@ -20,7 +20,7 @@ export default function Reports() {
       } else {
         pointerEvent = 'all';
       }
-    }, 3000);
+    }, 5000);
   }, []);
 
   return (
