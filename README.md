@@ -2,7 +2,7 @@
 
 Medikeeper is Blockchain based storage for saving, accessing, and managing medical records
 
-[Blockchain implementation](https://github.com/PrashantAmoli/MedikeeperBlockchain/) It uses the security of blockchain and the ease of web to update/create/store records on blockchain.
+[Blockchain Contracts Code](https://github.com/PrashantAmoli/Medikeeper-Blockchain/) It uses the security of blockchain and the ease of web to update/create/store records on blockchain.
 
 ## View Medical Records
 
