@@ -1,6 +1,11 @@
 import styles from '../../styles/cards.module.css';
+import Image from 'next/image';
 
 export default function Welcome() {
+  const myLoader = ({ src, width, quality }) => {
+    return `https://scitechdaily.com/images/Futuristic-Medicine-Health-Data-Biotechnology.gif`;
+    // return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+  };
   return (
     <>
       <div className={styles.card} style={{ boxShadow: 'none' }}>
@@ -23,7 +28,13 @@ export default function Welcome() {
           We provide a secure reporsitory on Ethereum Blockchain to stores your
           medical records
         </p>
-        <img href="https://i.gifer.com/74pZ.gif" />
+        <Image
+          loader={myLoader}
+          src="https://scitechdaily.com/images/Futuristic-Medicine-Health-Data-Biotechnology.gif"
+          alt="Picture of the author"
+          width={700}
+          height={400}
+        />
       </div>
     </>
   );

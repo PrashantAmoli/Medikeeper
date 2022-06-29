@@ -15,13 +15,13 @@ const Report = ({ Data }) => {
       <div className={styles.card}>
         <h2 className={styles.head}>Report</h2>
         <br />
-        <h3>Patient's ID: {Data.patientsID}</h3>
-        <h3>Doctor's ID: {Data.updatedBy}</h3>
-        <h3>Updated on: {Data.lastUpdated}</h3>
-        <h3>Diagnosis: {Data.diagnosis}</h3>
+        <h3>Patient's ID: &nbsp;{Data.patientsID}</h3>
+        <h3>Doctor's ID: &ensp;{Data.updatedBy}</h3>
+        <h3>Updated on: &ensp;{Data.lastUpdated}</h3>
+        <h3>Diagnosis: &emsp; {Data.diagnosis}</h3>
         <h3>Prescription: {Data.currentMedicalDosage}</h3>
         <h3>
-          Report File:
+          Report File: &ensp;
           {Data.pdf != '' ? (
             <span>
               <a href={Data.pdf}>View Report</a>
