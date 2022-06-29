@@ -62,7 +62,14 @@ export default function PatientForm() {
     }
 
     await setPatient(data);
-
+    msg = `Transaction Successful: Data received from the Ethereum Blockchain`;
+    await setMessage(msg);
+    await setShowModal(true);
+    setTimeout(() => {
+      msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+      setShowModal(false);
+      setMessage(msg);
+    }, 5000);
     return true;
   };
 

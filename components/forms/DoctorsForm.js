@@ -4,6 +4,7 @@ import styles from '../../styles/Forms.module.css';
 import GetData from '../scripts/GetData.js';
 import DoctorsData from '../cards/DoctorsData.js';
 import Modal from '../cards/Modal';
+import Image from 'next/image';
 
 export default function DoctorsForm() {
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +19,10 @@ export default function DoctorsForm() {
   });
 
   const IDRef = useRef();
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
 
   // * using Custom hook to interact with Contract
   // const { connect, account, user, getDoctor } = useDoctors();
@@ -55,6 +60,14 @@ export default function DoctorsForm() {
     }
 
     await setDoctor(doctor);
+    msg = `Transaction Successful: Data received from the Ethereum Blockchain`;
+    await setMessage(msg);
+    await setShowModal(true);
+    setTimeout(() => {
+      msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+      setShowModal(false);
+      setMessage(msg);
+    }, 5000);
     return true;
   };
 

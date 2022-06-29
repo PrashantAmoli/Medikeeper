@@ -128,6 +128,15 @@ export default function ReportDataForm() {
     await setReports(data);
 
     await getDoctorData(data.updatedBy);
+    msg = `Transaction Successful: Data received from the Ethereum Blockchain`;
+    await setMessage(msg);
+    await setShowModal(true);
+    setTimeout(() => {
+      msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+      setShowModal(false);
+      setMessage(msg);
+    }, 5000);
+    return true;
   };
 
   return (

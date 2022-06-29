@@ -14,10 +14,10 @@ const DoctorsData = ({ Doctor }) => {
         <div className={styles.card}>
           <h2 className={styles.head}>Doctor</h2>
           <br />
-          <h3>Name: {Doctor.doctorsName}</h3>
-          <h3>Speciality: {Doctor.speciality}</h3>
-          <h3>Hospital: {Doctor.hospital}</h3>
-          <h3>Gender: {Doctor.gender}</h3>
+          <h3>Name: &emsp; &ensp; {Doctor.doctorsName}</h3>
+          <h3>Speciality: &nbsp;{Doctor.speciality}</h3>
+          <h3>Hospital: &ensp; {Doctor.hospital}</h3>
+          <h3>Gender: &emsp; {Doctor.gender}</h3>
         </div>
       </>
     );

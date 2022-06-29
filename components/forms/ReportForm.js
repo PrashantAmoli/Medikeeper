@@ -96,9 +96,14 @@ export default function ReportForm() {
     }
 
     await addRecord(data);
-    await setMessage(`Data uploaded on Ethereum Blockchain`);
-    setShowModal(false);
-
+    msg = `Transaction Successful: Data added to Ethereum Blockchain`;
+    await setMessage(msg);
+    await setShowModal(true);
+    setTimeout(() => {
+      msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+      setShowModal(false);
+      setMessage(msg);
+    }, 5000);
     return true;
   };
 
