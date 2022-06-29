@@ -4,6 +4,7 @@ import styles from '../../styles/Forms.module.css';
 import PatientData from '../cards/PatientData.js';
 import GetData from '../scripts/GetData.js';
 import Modal from '../cards/Modal';
+import Image from 'next/image';
 
 export default function PatientForm() {
   const [showModal, setShowModal] = useState(false);
@@ -20,6 +21,10 @@ export default function PatientForm() {
   });
 
   const IDRef = useRef();
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
 
   const { getPatient } = GetData();
 
@@ -85,9 +90,12 @@ export default function PatientForm() {
 
       {Patient.dob ? (
         <div className={styles.form} style={{ boxShadow: 'none' }}>
-          <img
+          <Image
+            loader={myLoader}
             src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Patient_Care_GIF_Animation_Loop.gif"
             alt="Doctor"
+            width={400}
+            height={200}
           />
         </div>
       ) : (
@@ -99,6 +107,15 @@ export default function PatientForm() {
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
             {Message}
+            <div className={styles.form} style={{ boxShadow: 'none' }}>
+              <Image
+                loader={myLoader}
+                src="https://acegif.com/wp-content/gif/gws-18.gif"
+                alt="Report"
+                width={400}
+                height={300}
+              />
+            </div>
           </Modal>
         )}
       </section>

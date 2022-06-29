@@ -84,9 +84,12 @@ export default function DoctorsForm() {
 
       {Doctor.doctorsName ? (
         <div className={styles.form} style={{ boxShadow: 'none' }}>
-          <img
-            src="https://c.tenor.com/nYCc0GbYYp8AAAAC/healthy-doctor.gif"
+          <Image
+            loader={myLoader}
+            src="https://www.careerguide.com/career/wp-content/uploads/2020/03/doctor-animated-132740-2519962.gif"
             alt="Doctor"
+            width={450}
+            height={300}
           />
         </div>
       ) : (
@@ -98,6 +101,15 @@ export default function DoctorsForm() {
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
             {Message}
+            <div className={styles.form} style={{ boxShadow: 'none' }}>
+              <Image
+                loader={myLoader}
+                src="https://c.tenor.com/nYCc0GbYYp8AAAAC/healthy-doctor.gif"
+                alt="Report"
+                width={300}
+                height={300}
+              />
+            </div>
           </Modal>
         )}
       </section>

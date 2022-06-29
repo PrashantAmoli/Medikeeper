@@ -7,6 +7,7 @@ import DoctorsData from '../cards/DoctorsData.js';
 import Report from '../cards/Report.js';
 import GetData from '../scripts/GetData.js';
 import Modal from '../cards/Modal';
+import Image from 'next/image';
 
 export default function ReportDataForm() {
   const [ID, setID] = useState('');
@@ -44,6 +45,10 @@ export default function ReportDataForm() {
   const IDRef = useRef();
 
   const { getPatient, getReport, getDoctor } = GetData();
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
 
   const getPatientData = async () => {
     const result = await getPatient(IDRef.current.value);
@@ -149,14 +154,66 @@ export default function ReportDataForm() {
       </form>
 
       <DoctorsData Doctor={Doctor} />
+
+      {Reports.updatedBy != '' ? (
+        <div className={styles.form} style={{ boxShadow: 'none' }}>
+          <Image
+            loader={myLoader}
+            src="https://acegif.com/wp-content/gif/gws-18.gif"
+            alt="Report"
+            width={400}
+            height={300}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
+
       <PatientData Patient={Patient} />
+
+      {Reports.updatedBy != '' ? (
+        <div className={styles.form} style={{ boxShadow: 'none' }}>
+          <Image
+            loader={myLoader}
+            src="https://scitechdaily.com/images/Futuristic-Medicine-Health-Data-Biotechnology.gif"
+            alt="Report"
+            width={700}
+            height={400}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
+
       <Report Data={Reports} />
 
+      {Reports.updatedBy != '' ? (
+        <div className={styles.form} style={{ boxShadow: 'none' }}>
+          <Image
+            loader={myLoader}
+            src="https://images.squarespace-cdn.com/content/v1/5a8694a6e45a7c0c0c9dfac1/1625848330150-P6AZKX3IWVSWBSTR7D6X/report_mini_black_animated.gif"
+            alt="Report"
+            width={500}
+            height={600}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
+
       <section>
-        {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
             {Message}
+            <div className={styles.form} style={{ boxShadow: 'none' }}>
+              <Image
+                loader={myLoader}
+                src="https://scitechdaily.com/images/Futuristic-Medicine-Health-Data-Biotechnology.gif"
+                alt="Report"
+                width={500}
+                height={300}
+              />
+            </div>
           </Modal>
         )}
       </section>

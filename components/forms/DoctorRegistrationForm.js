@@ -3,6 +3,7 @@ import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import AddData from '../scripts/AddData.js';
 import Modal from '../cards/Modal';
+import Image from 'next/image';
 
 export default function RegistrationForm() {
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +22,10 @@ export default function RegistrationForm() {
   const doctorsNameRef = useRef();
   const hospitalRef = useRef();
   const doctorsIDRef = useRef();
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -129,6 +134,15 @@ export default function RegistrationForm() {
         {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
+            <div className={styles.form} style={{ boxShadow: 'none' }}>
+              <Image
+                loader={myLoader}
+                src="https://www.samrattechnologies.com/assets/images/wallpaper/processing.gif"
+                alt="Report"
+                width={300}
+                height={100}
+              />
+            </div>
             {Message}
           </Modal>
         )}
