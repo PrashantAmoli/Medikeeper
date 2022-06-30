@@ -67,7 +67,9 @@ _Note:_ Reports can be uploaded as PDF only.
 <p align="center">
 <img src="https://www.cognierblock.com/img/bi-admin.gif" height="200" align="center" />
 </p>
-  
+ 
+[Project Report](https://drive.google.com/file/d/1xEW9c46SOGT6Kgn41ZDK7k_cNUf16cpI/view?usp=sharing)
+
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/medikeeper)
 
 Deployed on Vercel at [Medikeeper.vercel.app](https://medikeeper.vercel.app)
