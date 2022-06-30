@@ -3,6 +3,7 @@ import { validateID, validateName, validateAddress } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import AddData from '../scripts/AddData.js';
 import Modal from '../cards/Modal';
+import Image from 'next/image';
 
 export default function PatientRegistrationForm() {
   const [showModal, setShowModal] = useState(false);
@@ -22,6 +23,10 @@ export default function PatientRegistrationForm() {
   const addressRef = useRef();
   const allergiesRef = useRef();
   const dobRef = useRef();
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
 
   const { addPatient } = AddData();
 
@@ -152,6 +157,15 @@ export default function PatientRegistrationForm() {
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
             {Message}
+            <div className={styles.form} style={{ boxShadow: 'none' }}>
+              <Image
+                loader={myLoader}
+                src="https://www.samrattechnologies.com/assets/images/wallpaper/processing.gif"
+                alt="Report"
+                width={300}
+                height={100}
+              />
+            </div>
           </Modal>
         )}
       </section>

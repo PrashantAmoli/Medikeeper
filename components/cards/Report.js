@@ -1,5 +1,6 @@
 import styles from '../../styles/cards.module.css';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const Report = ({ Data }) => {
   const [Reports, setReports] = useState([]);
@@ -9,6 +10,10 @@ const Report = ({ Data }) => {
     reports.shift();
     setReports(reports);
   }, [Data]);
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
 
   return (
     <>
@@ -41,7 +46,15 @@ const Report = ({ Data }) => {
           );
         })}
         {Reports.length > 0 ? (
-          <img href="https://thumbs.dreamstime.com/z/happy-cartoon-doctor-showing-medical-report-vector-happy-cartoon-doctor-showing-medical-report-vector-142325048.jpg" />
+          <>
+            {/* <Image
+            loader={myLoader}
+            src="https://2.bp.blogspot.com/-ncGX0FKJ0fU/XIwzD9MIFnI/AAAAAAA0Zyk/Ipwx0p9BxGgD0uJ6fOy6vumbBvtnEfGVgCLcBGAs/s1600/AW3717982_01.gif"
+            alt="Report"
+            width={500}
+            height={400}
+          /> */}
+          </>
         ) : (
           <></>
         )}
