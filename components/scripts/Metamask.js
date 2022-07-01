@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import useSession from '../hooks/useSession.js';
 import styles from '../../styles/cards.module.css';
 import GetData from './GetData.js';
+import Image from 'next/image';
+import Modal from '../cards/Modal';
 
 export default function Metamask() {
   const [Address, setAddress] = useState('');
@@ -11,7 +13,6 @@ export default function Metamask() {
 
   useEffect(() => {
     if (getItem('address') && ethereum.isConnected() == false) {
-      console.log(ethereum.isConnected());
       setAddress(null);
       removeItem('address');
     } else if (getItem('address')) setAddress(getItem('address'));
@@ -20,6 +21,10 @@ export default function Metamask() {
   useEffect(() => {
     // if (Address != null) setItem('address', Address);
   }, [Address]);
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
 
   // Button handler button for handling a request event for metamask
   const handle = async () => {
@@ -61,10 +66,12 @@ export default function Metamask() {
             <button onClick={removeSession}>Reset</button>
           </>
         )}
-        <img
+        <Image
+          loader={myLoader}
           src="https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif"
           alt="Metamask"
           width="400"
+          height="300"
         />
       </div>
     </>

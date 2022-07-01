@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { validateID, validateName, validateAddress } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import AddData from '../scripts/AddData.js';
+import GetData from '../scripts/GetData.js';
 import Modal from '../cards/Modal';
 import Image from 'next/image';
 
@@ -29,6 +30,7 @@ export default function PatientRegistrationForm() {
   };
 
   const { addPatient } = AddData();
+  const { getPatient } = GetData();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +49,21 @@ export default function PatientRegistrationForm() {
       valid = false;
       msg = msg + '|  Invalid Number  |';
     }
+
+    // Check if the patient with that id already exists
+    const checkPatient = await getPatient(data.patientsID);
+    if (checkPatient[0].length > 3) {
+      msg = `Patient with id ${data.patientsID} already exists⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      setTimeout(() => {
+        msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+        setShowModal(false);
+        setMessage(msg);
+      }, 5000);
+      return false;
+    }
+
     if (validateName(patientsNameRef.current.value.replace(/\s+/g, ' ').trim()))
       data.patientsName = patientsNameRef.current.value
         .replace(/\s+/g, ' ')
@@ -76,7 +93,6 @@ export default function PatientRegistrationForm() {
     data.dob = String(dobRef.current.value);
     data.gender = gender;
     await setData(data);
-    console.log(JSON.stringify(data));
 
     if (valid == false) {
       await setMessage(msg);
@@ -156,7 +172,6 @@ export default function PatientRegistrationForm() {
         {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
-            {Message}
             <div className={styles.form} style={{ boxShadow: 'none' }}>
               <Image
                 loader={myLoader}
@@ -166,6 +181,7 @@ export default function PatientRegistrationForm() {
                 height={100}
               />
             </div>
+            {Message}
           </Modal>
         )}
       </section>

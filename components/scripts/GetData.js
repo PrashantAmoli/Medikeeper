@@ -50,7 +50,6 @@ const GetData = () => {
         }
       }
     );
-    console.log(JSON.stringify(result), result);
     // name, speciality, hospital, gender
     return result;
   };
@@ -85,7 +84,6 @@ const GetData = () => {
           }
         }
       );
-    console.log(JSON.stringify(result), result);
     return result;
   };
 

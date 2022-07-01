@@ -129,7 +129,6 @@ export default function ReportDataForm() {
       return;
     }
 
-    console.log(data.pdfAll);
     await setReports(data);
 
     await getDoctorData(data.updatedBy);
