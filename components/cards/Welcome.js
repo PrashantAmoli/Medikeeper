@@ -48,7 +48,6 @@ export default function Welcome() {
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
             <h3 className={styles.head}>Directions of use:</h3>
-            <br />
             <div
               className={styles.form}
               style={{
@@ -84,6 +83,12 @@ export default function Welcome() {
                 <li>
                   <span>
                     If connected isn't displayed then click Connect again.
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    To disconnect, hit reset and open Metamask app and
+                    disconnect from there.
                   </span>
                 </li>
               </ol>
