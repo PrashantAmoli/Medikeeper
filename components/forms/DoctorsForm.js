@@ -74,7 +74,13 @@ export default function DoctorsForm() {
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input type="text" placeholder="Doctor's ID" ref={IDRef} required />
+        <input
+          type="text"
+          placeholder="Doctor's ID"
+          ref={IDRef}
+          style={{ textAlign: 'center' }}
+          required
+        />
         {/* <input type="text" placeholder="Patient's ID" /> */}
         <button type="submit" className={styles.btn}>
           Submit

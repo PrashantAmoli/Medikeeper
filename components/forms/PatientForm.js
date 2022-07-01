@@ -81,7 +81,13 @@ export default function PatientForm() {
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input type="text" placeholder="Patient ID" ref={IDRef} required />
+        <input
+          type="text"
+          placeholder="Patient ID"
+          ref={IDRef}
+          style={{ textAlign: 'center' }}
+          required
+        />
         <button className={styles.btn} type="submit">
           Submit
         </button>
