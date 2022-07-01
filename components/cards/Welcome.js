@@ -12,9 +12,17 @@ export default function Welcome() {
   };
   return (
     <>
-      <div className={styles.card} style={{ boxShadow: 'none' }}>
+      <div
+        className={styles.card}
+        style={{
+          boxShadow: 'none',
+          backgroundImage: 'none',
+          backgroundColor: 'rgba(0,0,0,0.01)',
+          background: 'transparent',
+        }}
+      >
         <h1 className={styles.head}>Welcome to Medikeeper</h1>
-        <h3 className={styles.head}>Blockchain based medical record storage</h3>
+        <h3 className={styles.head}>Blockchain-based Medical Record Storage</h3>
         <br />
         <p>
           Too often our health must take the back seat for what really is
@@ -30,7 +38,8 @@ export default function Welcome() {
         </p>
         <p>
           We provide a secure reporsitory on Ethereum Blockchain to stores your
-          medical records
+          medical records and makes them accessible to the right user when
+          needed.
         </p>
         <button className={styles.head} onClick={() => setShowModal(true)}>
           DIRECTIONS OF USE

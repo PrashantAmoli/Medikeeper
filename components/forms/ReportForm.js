@@ -81,7 +81,12 @@ export default function ReportForm() {
       data.pdf = `https://dweb.link/ipfs/${cid}`;
     }
 
-    // data.pdf = 'bafybeifynkhsnf63nsriir56zdox3fa5o62hejotpj3zzpemzztceiqauy';
+    if (data.pdf == `https://dweb.link/ipfs/`) {
+      msg = "    PDF Report didn't get uploaded to IPFS: Please try again    |";
+      await setMessage(msg);
+      await setShowModal(true);
+      return;
+    }
     await setData(data);
 
     if (valid == false) {

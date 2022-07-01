@@ -8,20 +8,30 @@ import Modal from '../cards/Modal';
 export default function Metamask() {
   const [showModal, setShowModal] = useState(false);
   const [Address, setAddress] = useState('');
+  const [URL, setURL] = useState(
+    'https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif'
+  );
 
   const { setItem, getItem, removeItem } = useSession();
   const { load, getCurrentAccount } = GetData();
 
-  useEffect(() => {
+  const url1 =
+    'https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif';
+  const url2 =
+    'https://houseoffirst.com/images/misc/mm_twitch_yellow_matte.gif';
+
+  useEffect(async () => {
     if (getItem('address') && ethereum.isConnected() == false) {
       setAddress(null);
       removeItem('address');
     } else if (getItem('address')) setAddress(getItem('address'));
   }, []);
 
-  useEffect(() => {
-    // if (Address != null) setItem('address', Address);
-  }, [Address]);
+  useEffect(async () => {
+    setTimeout(() => {
+      URL == url1 ? setURL(url2) : setURL(url1);
+    }, 5000);
+  }, [URL]);
 
   const myLoader = ({ src, width, quality }) => {
     return `${src}`;
@@ -56,7 +66,14 @@ export default function Metamask() {
 
   return (
     <>
-      <div className={styles.card} style={{ alignItems: 'center' }}>
+      <div
+        className={styles.card}
+        style={{
+          alignItems: 'center',
+          backgroundImage: 'none',
+          background: 'transparent',
+        }}
+      >
         <h2 className={styles.head}>Metamask</h2>
         {Address == '' || Address == undefined ? (
           <>
@@ -75,10 +92,10 @@ export default function Metamask() {
         )}
         <Image
           loader={myLoader}
-          src="https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif"
+          src={URL}
           alt="Metamask"
-          width="400"
-          height="300"
+          width={400}
+          height={300}
         />
       </div>
 
@@ -91,10 +108,10 @@ export default function Metamask() {
               <div className={styles.head}>
                 <Image
                   loader={myLoader}
-                  src="https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif"
-                  alt="Report"
+                  src={URL}
+                  alt="Metamask"
                   width={300}
-                  height={200}
+                  height={250}
                 />
               </div>
             </div>
