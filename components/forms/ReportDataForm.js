@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { validateID } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import cardStyles from '../../styles/cards.module.css';
@@ -10,12 +10,17 @@ import Modal from '../cards/Modal';
 import Image from 'next/image';
 
 export default function ReportDataForm() {
+  const [URL, setURL] = useState({
+    url: 'https://scitechdaily.com/images/Futuristic-Medicine-Health-Data-Biotechnology.gif',
+    width: '600',
+    height: '400',
+  });
   const [ID, setID] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [Message, setMessage] = useState('Something went wrong ⁉️ ');
 
   const [Patient, setPatient] = useState({
-    patientsID: '',
+    patientsURL: '',
     patientsName: '',
     number: '',
     gender: '',
@@ -43,6 +48,11 @@ export default function ReportDataForm() {
   });
 
   const IDRef = useRef();
+
+  const url1 =
+    'https://images.squarespace-cdn.com/content/v1/5a8694a6e45a7c0c0c9dfac1/1625848330150-P6AZKX3IWVSWBSTR7D6X/report_mini_black_animated.gif';
+  const url2 =
+    'https://scitechdaily.com/images/Futuristic-Medicine-Health-Data-Biotechnology.gif';
 
   const { getPatient, getReport, getDoctor } = GetData();
 
@@ -170,35 +180,31 @@ export default function ReportDataForm() {
 
       <PatientData Patient={Patient} />
 
-      {Reports.updatedBy != '' ? (
-        <div className={styles.form} style={{ boxShadow: 'none' }}>
-          <Image
-            loader={myLoader}
-            src="https://scitechdaily.com/images/Futuristic-Medicine-Health-Data-Biotechnology.gif"
-            alt="Report"
-            width={700}
-            height={400}
-          />
-        </div>
-      ) : (
-        <></>
-      )}
+      <div className={styles.form} style={{ boxShadow: 'none' }}>
+        <Image
+          loader={myLoader}
+          src={URL.url}
+          alt="Report"
+          width={URL.width}
+          height={URL.height}
+        />
+      </div>
 
       <Report Data={Reports} />
 
-      {Reports.updatedBy != '' ? (
+      {/* {Reports.updatedBy != '' ? (
         <div className={styles.form} style={{ boxShadow: 'none' }}>
           <Image
             loader={myLoader}
-            src="https://images.squarespace-cdn.com/content/v1/5a8694a6e45a7c0c0c9dfac1/1625848330150-P6AZKX3IWVSWBSTR7D6X/report_mini_black_animated.gif"
+            src={URL.url}
             alt="Report"
-            width={500}
-            height={600}
+            width={URL.width}
+            height={URL.height}
           />
         </div>
       ) : (
         <></>
-      )}
+      )} */}
 
       <section>
         {showModal && (
@@ -207,10 +213,10 @@ export default function ReportDataForm() {
             <div className={styles.form} style={{ boxShadow: 'none' }}>
               <Image
                 loader={myLoader}
-                src="https://scitechdaily.com/images/Futuristic-Medicine-Health-Data-Biotechnology.gif"
+                src="https://images.squarespace-cdn.com/content/v1/5a8694a6e45a7c0c0c9dfac1/1625848330150-P6AZKX3IWVSWBSTR7D6X/report_mini_black_animated.gif"
                 alt="Report"
-                width={500}
-                height={300}
+                width={330}
+                height={400}
               />
             </div>
           </Modal>

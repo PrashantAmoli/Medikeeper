@@ -7,7 +7,7 @@ const Report = ({ Data }) => {
 
   useEffect(() => {
     let reports = Data.pdfAll.split(', ');
-    reports.shift();
+    // reports = reports.shift();
     setReports(reports);
   }, [Data]);
 
@@ -27,27 +27,51 @@ const Report = ({ Data }) => {
         <h3>Prescription: {Data.currentMedicalDosage}</h3>
         <h3>
           Report File: &ensp;
-          {Data.pdf != '' ? (
-            <span>
-              <a href={Data.pdf} target="_blank">
-                View Report
-              </a>
-            </span>
+          {Data.pdf != '' &&
+          Data.pdf != `https://dweb.link/ipfs/` &&
+          Data.pdf.includes(`https://dweb.link/ipfs/`, 0) ? (
+            <>
+              <div className={styles.head}>
+                <embed
+                  src={`${Data.pdf}`}
+                  width={'100%'}
+                  height={'400px'}
+                  type="application/pdf"
+                />
+              </div>
+              <span>
+                <a href={Data.pdf} target="_blank">
+                  Open Full Report in new tab
+                </a>
+              </span>
+            </>
           ) : (
             <></>
           )}
         </h3>
-        {Reports.length > 0 ? <h3>Previous Reports:</h3> : <></>}
+        {Reports.length > 0 ? <h3>Medical History:</h3> : <></>}
         {Reports.map((report) => {
-          return (
-            <>
-              <span className={styles.head}>
-                <a href={report} target="_blank">
-                  View Report
-                </a>
-              </span>
-            </>
-          );
+          if (
+            report != `https://dweb.link/ipfs/` &&
+            report.includes(`https://dweb.link/ipfs/`, 0)
+          )
+            return (
+              <>
+                <div className={styles.head}>
+                  <embed
+                    src={`${report}`}
+                    width={'100%'}
+                    height={'400px'}
+                    type="application/pdf"
+                  />
+                </div>
+                <span className={styles.head}>
+                  <a href={report} target="_blank">
+                    Open Full Report in new tab
+                  </a>
+                </span>
+              </>
+            );
         })}
         {Reports.length > 0 ? (
           <>

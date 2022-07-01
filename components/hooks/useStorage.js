@@ -27,7 +27,7 @@ const useStorage = () => {
     for (const file of files) {
       console.log(`${file.cid} ${file.name} ${file.size}`);
       await setCID(file.cid);
-      alert(`${file.cid} ${file.name} ${file.size}`);
+      // alert(`${file.cid} ${file.name} ${file.size}`);
     }
     return CID;
   };
