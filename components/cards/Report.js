@@ -1,6 +1,6 @@
 import styles from '../../styles/cards.module.css';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 
 const Report = ({ Data }) => {
   const [Reports, setReports] = useState([]);
@@ -40,9 +40,11 @@ const Report = ({ Data }) => {
                 />
               </div>
               <span>
-                <a href={Data.pdf} target="_blank">
-                  Open Full Report in new tab
-                </a>
+                <Link href={Data.pdf} target="_blank">
+                  <a href={Data.pdf} target="_blank">
+                    Open Full Report in new tab
+                  </a>
+                </Link>
               </span>
             </>
           ) : (
@@ -66,9 +68,11 @@ const Report = ({ Data }) => {
                   />
                 </div>
                 <span className={styles.head}>
-                  <a href={report} target="_blank">
-                    Open Full Report in new tab
-                  </a>
+                  <Link href={report} target="_blank">
+                    <a href={report} target="_blank">
+                      Open Full Report in new tab
+                    </a>
+                  </Link>
                 </span>
               </>
             );
