@@ -41,6 +41,11 @@
   align-items: center;
   justify-content: center;
   margin-top: 3.3rem;
+  background-image: url('http://24.media.tumblr.com/d423eb21f1e477fa355326299a4408fd/tumblr_mstilrbN8P1s5jjtzo1_500.gif');
+  background-position: bottom;
+  background-repeat: repeat-x;
+  background-size: contain;
+  background-blend-mode: darken;
 }
 
 @media (max-width: 720px) {

@@ -66,7 +66,14 @@ export default function Metamask() {
 
   return (
     <>
-      <div className={styles.card} style={{ alignItems: 'center' }}>
+      <div
+        className={styles.card}
+        style={{
+          alignItems: 'center',
+          backgroundImage: 'none',
+          background: 'transparent',
+        }}
+      >
         <h2 className={styles.head}>Metamask</h2>
         {Address == '' || Address == undefined ? (
           <>
