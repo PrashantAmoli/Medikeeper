@@ -20,6 +20,17 @@ body {
   color: var(--font);
   padding-bottom: 0.5rem;
   min-height: 100vh;
+
+  /* background-image: url('https://miro.medium.com/max/1204/1*iabHjgerE0Z7N7aynA_KpQ.gif'); */
+  /* background-image: url('https://i.pinimg.com/originals/66/53/31/6653318bb022e7ca9339775eebd6987b.gif'); */
+  background-image: url('https://www.mercury.net/img/world-map.gif'),
+    url('http://24.media.tumblr.com/d423eb21f1e477fa355326299a4408fd/tumblr_mstilrbN8P1s5jjtzo1_500.gif');
+  /* background-image: url('https://static.wixstatic.com/media/ad442e_5425570dc77148f4898f857a96b73297~mv2.gif'); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-blend-mode: darken;
+  backdrop-filter: blur;
 }
 
 * {
@@ -65,10 +76,17 @@ img:hover {
   box-shadow: 0px 5px 10px 0px #aaa;
   position: fixed;
   width: 100%;
-  background: var(--bg);
+  /* background: var(--bg); */
   color: var(--font);
-  opacity: 0.8;
+  /* opacity: 0.8; */
   z-index: 100;
+  /* background-image: url('https://thumbs.gfycat.com/MindlessHarshAfricanhornbill-max-1mb.gif'); */
+  background-image: url('http://24.media.tumblr.com/d423eb21f1e477fa355326299a4408fd/tumblr_mstilrbN8P1s5jjtzo1_500.gif');
+  /* background-image: url('https://i.pinimg.com/originals/66/53/31/6653318bb022e7ca9339775eebd6987b.gif'); */
+  background-position: bottom;
+  background-repeat: repeat-x;
+  background-size: contain;
+  background-blend-mode: darken;
 }
 
 .navbar-container {
@@ -181,6 +199,11 @@ img:hover {
     transition: transform 0.5s ease-in-out;
     box-shadow: 5px 0px 10px 0px #aaa;
     overflow: auto;
+    background-image: url('http://24.media.tumblr.com/d423eb21f1e477fa355326299a4408fd/tumblr_mstilrbN8P1s5jjtzo1_500.gif');
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-blend-mode: difference;
   }
 
   .navbar .menu-items li {
@@ -278,6 +301,7 @@ textarea {
   font-size: 1.1rem;
   padding: 3px 8px;
   margin: 1rem 1rem 2.5rem 1rem;
+  background: rgba(0, 0, 0, 0.01);
 }
 
 button {

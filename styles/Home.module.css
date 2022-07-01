@@ -7,4 +7,9 @@
   align-items: center;
   background-color: var(--bg);
   color: var(--font);
+  background-image: url('https://houseoffirst.com/images/misc/mm_twitch_yellow_matte.gif');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-blend-mode: hard-light;
 }

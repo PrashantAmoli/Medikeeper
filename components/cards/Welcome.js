@@ -12,7 +12,10 @@ export default function Welcome() {
   };
   return (
     <>
-      <div className={styles.card} style={{ boxShadow: 'none' }}>
+      <div
+        className={styles.card}
+        style={{ boxShadow: 'none', backgroundColor: 'rgba(0,0,0,0.4)' }}
+      >
         <h1 className={styles.head}>Welcome to Medikeeper</h1>
         <h3 className={styles.head}>Blockchain based medical record storage</h3>
         <br />
