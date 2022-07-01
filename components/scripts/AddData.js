@@ -33,8 +33,6 @@ const AddData = () => {
       contractAddress
     );
 
-    console.log(JSON.stringify(Doctor));
-
     const result = await contract.methods
       .addMedicalInfoDoctor(
         Doctor.doctorsName,
@@ -49,10 +47,10 @@ const AddData = () => {
         },
         (err, result) => {
           if (err) console.log(err);
-          else if (result) console.log(result, JSON.stringify(result));
+          else if (result) console.log(result);
         }
       );
-    console.log('Result', JSON.stringify(result));
+    return result;
   };
 
   const addPatient = async (Patient) => {
@@ -63,8 +61,6 @@ const AddData = () => {
       AddMedicalInfoABI,
       contractAddress
     );
-
-    console.log(JSON.stringify(Patient));
 
     const result = await contract.methods
       .addMedicalInfoPatient(
@@ -82,10 +78,10 @@ const AddData = () => {
         },
         (err, result) => {
           if (err) console.log(err);
-          else if (result) console.log(result, JSON.stringify(result));
+          else if (result) console.log(result);
         }
       );
-    console.log('Result', JSON.stringify(result));
+    return result;
   };
 
   const addRecord = async (Report) => {
@@ -96,8 +92,6 @@ const AddData = () => {
       AddMedicalInfoABI,
       contractAddress
     );
-
-    console.log(JSON.stringify(Report));
 
     const result = await contract.methods
       .addMedicalRecords(
@@ -114,10 +108,10 @@ const AddData = () => {
         },
         (err, result) => {
           if (err) console.log(err);
-          else if (result) console.log(result, JSON.stringify(result));
+          else if (result) console.log(result);
         }
       );
-    console.log('Result', JSON.stringify(result));
+    return result;
   };
 
   return { Account, addDoctor, addPatient, addRecord };

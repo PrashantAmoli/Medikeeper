@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { validateID, validateName } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import AddData from '../scripts/AddData.js';
+import GetData from '../scripts/GetData.js';
 import Modal from '../cards/Modal';
 import Image from 'next/image';
 
@@ -17,6 +18,7 @@ export default function RegistrationForm() {
   });
 
   const { addDoctor } = AddData();
+  const { getDoctor } = GetData();
 
   const specialityRef = useRef();
   const doctorsNameRef = useRef();
@@ -40,6 +42,21 @@ export default function RegistrationForm() {
       valid = false;
       msg = msg + '|  Invalid Number  |';
     }
+
+    // Check if any Docotr with the same id exists
+    const checkDoctor = await getDoctor(data.doctorsID);
+    if (checkDoctor[0].length > 3) {
+      msg = `Doctor with id ${data.doctorsID} already exists⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      setTimeout(() => {
+        msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+        setShowModal(false);
+        setMessage(msg);
+      }, 5000);
+      return false;
+    }
+
     if (validateName(specialityRef.current.value.trim())) {
       data.speciality = specialityRef.current.value.trim();
     } else {

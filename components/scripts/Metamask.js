@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import useSession from '../hooks/useSession.js';
 import styles from '../../styles/cards.module.css';
 import GetData from './GetData.js';
+import Image from 'next/image';
+import Modal from '../cards/Modal';
 
 export default function Metamask() {
+  const [showModal, setShowModal] = useState(false);
   const [Address, setAddress] = useState('');
 
   const { setItem, getItem, removeItem } = useSession();
@@ -11,7 +14,6 @@ export default function Metamask() {
 
   useEffect(() => {
     if (getItem('address') && ethereum.isConnected() == false) {
-      console.log(ethereum.isConnected());
       setAddress(null);
       removeItem('address');
     } else if (getItem('address')) setAddress(getItem('address'));
@@ -21,9 +23,19 @@ export default function Metamask() {
     // if (Address != null) setItem('address', Address);
   }, [Address]);
 
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
+
   // Button handler button for handling a request event for metamask
   const handle = async () => {
-    await load();
+    const loader = await load();
+
+    if (loader == false) {
+      setShowModal(true);
+      return false;
+    }
+
     const update = async (add) => {
       const address = await getCurrentAccount();
       if (address == '' || address == undefined) {
@@ -61,12 +73,37 @@ export default function Metamask() {
             <button onClick={removeSession}>Reset</button>
           </>
         )}
-        <img
+        <Image
+          loader={myLoader}
           src="https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif"
           alt="Metamask"
           width="400"
+          height="300"
         />
       </div>
+
+      <section>
+        {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)} show={showModal}>
+            <div className={styles.form} style={{ boxShadow: 'none' }}>
+              <h3 className={styles.head}>Please Install Metamask!</h3>
+              <div className={styles.head}>
+                <Image
+                  loader={myLoader}
+                  src="https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif"
+                  alt="Report"
+                  width={300}
+                  height={200}
+                />
+              </div>
+            </div>
+            <span>
+              Read the 'Directions of Use' from the Homepage to know more.
+            </span>
+          </Modal>
+        )}
+      </section>
     </>
   );
 }

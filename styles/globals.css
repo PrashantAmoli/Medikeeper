@@ -44,8 +44,11 @@ body {
 
 img {
   border-radius: 1.5rem;
-  margin: 1rem;
 }
+img:hover {
+  border-radius: 1rem;
+}
+
 /* Navbar */
 .navbar input[type='checkbox'],
 .navbar .hamburger-lines {
@@ -291,7 +294,7 @@ button:hover {
   font-weight: bold;
   color: var(--hover);
   border: 2px outset;
-  /* box-shadow: inset 0px 1px 14px 1px #aaa; */
+  box-shadow: 0px 1px 5px 0px #aaa;
 }
 /* Form Ended */
 

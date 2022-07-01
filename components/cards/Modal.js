@@ -64,14 +64,15 @@ const Modal = ({ onClose, children, title }) => {
   const StyledModalWrapper = styled.div`
     width: 85%;  
     max-width: 500px;
-    height: 500px;
+    height: 700px;
     min-height: 500px;
     position: fixed;
+    top: 11%;
     `;
 
   const StyledModal = styled.div`
     background: ${Theme.bg};
-    height:100%;
+    min-height:70%;
     width:100%;
     border-radius: 1rem;
     padding: 15px;
@@ -87,7 +88,7 @@ const Modal = ({ onClose, children, title }) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
   `;
 
   const modalContent = (

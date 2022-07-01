@@ -13,15 +13,21 @@ const GetData = () => {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
       window.ethereum.enable();
+      return true;
+    } else {
+      return false;
     }
   };
   const load = async () => {
-    await loadWeb3();
+    const loaded = await loadWeb3();
+    return loaded;
   };
   const getCurrentAccount = async () => {
-    const accounts = await window.web3.eth.getAccounts();
-    setAccount(accounts[0]);
-    return accounts[0];
+    const accounts = await window?.web3?.eth?.getAccounts();
+    if (accounts[0] != undefined) {
+      setAccount(accounts[0]);
+      return accounts[0];
+    }
   };
 
   const getDoctor = async (ID) => {
@@ -50,7 +56,6 @@ const GetData = () => {
         }
       }
     );
-    console.log(JSON.stringify(result), result);
     // name, speciality, hospital, gender
     return result;
   };
@@ -85,7 +90,6 @@ const GetData = () => {
           }
         }
       );
-    console.log(JSON.stringify(result), result);
     return result;
   };
 

@@ -29,7 +29,9 @@ const Report = ({ Data }) => {
           Report File: &ensp;
           {Data.pdf != '' ? (
             <span>
-              <a href={Data.pdf}>View Report</a>
+              <a href={Data.pdf} target="_blank">
+                View Report
+              </a>
             </span>
           ) : (
             <></>
@@ -40,7 +42,9 @@ const Report = ({ Data }) => {
           return (
             <>
               <span className={styles.head}>
-                <a href={report}>View Report</a>
+                <a href={report} target="_blank">
+                  View Report
+                </a>
               </span>
             </>
           );
