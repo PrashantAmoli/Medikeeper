@@ -8,10 +8,10 @@ const PatientData = ({ Patient }) => {
         <br />
         <h3>Name: &emsp; {Patient.patientsName}</h3>
         <h3>Phone: &emsp; {Patient.number}</h3>
-        <h3>Date of Birth: {Patient.dob}</h3>
-        <h3>Gender: &emsp; {Patient.gender}</h3>
-        <h3>Address: &ensp; {Patient.address}</h3>
-        <h3>Allergies: &ensp;{Patient.allergies}</h3>
+        <h3>DOB: &emsp; &ensp;{Patient.dob}</h3>
+        <h3>Gender: &ensp; {Patient.gender}</h3>
+        <h3>Address: &ensp;{Patient.address}</h3>
+        <h3>Allergies:&nbsp;{Patient.allergies}</h3>
       </div>
     </>
   );

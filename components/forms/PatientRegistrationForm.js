@@ -178,7 +178,7 @@ export default function PatientRegistrationForm() {
                 src="https://www.samrattechnologies.com/assets/images/wallpaper/processing.gif"
                 alt="Report"
                 width={300}
-                height={100}
+                height={150}
               />
             </div>
             {Message}
