@@ -107,6 +107,16 @@ export default function ReportDataForm() {
 
   const handleReport = async (e) => {
     e.preventDefault();
+    
+    msg = `Processing Request: Please wait`;
+    await setMessage(msg);
+    await setShowModal(true);
+    setTimeout(() => {
+      msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+      setShowModal(false);
+      setMessage(msg);
+    }, 5000);
+
 
     let msg = 'Invalid Input: Please enter valid ID ⁉️  ';
     if (!validateID(IDRef.current.value)) {
