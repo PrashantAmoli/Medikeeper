@@ -107,7 +107,7 @@ export default function ReportDataForm() {
 
   const handleReport = async (e) => {
     e.preventDefault();
-    
+
     msg = `Processing Request: Please wait`;
     await setMessage(msg);
     await setShowModal(true);
@@ -116,7 +116,6 @@ export default function ReportDataForm() {
       setShowModal(false);
       setMessage(msg);
     }, 5000);
-
 
     let msg = 'Invalid Input: Please enter valid ID ⁉️  ';
     if (!validateID(IDRef.current.value)) {
@@ -166,7 +165,13 @@ export default function ReportDataForm() {
   return (
     <>
       <form className={styles.form} onSubmit={handleReport}>
-        <input type="text" placeholder="Patient ID" ref={IDRef} required />
+        <input
+          type="text"
+          placeholder="Patient ID"
+          ref={IDRef}
+          style={{ textAlign: 'center' }}
+          required
+        />
         <button className={styles.btn} type="submit">
           Submit
         </button>

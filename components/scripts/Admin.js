@@ -21,14 +21,14 @@ const Admin = () => {
     await loadWeb3();
   };
   const getCurrentAccount = async () => {
-    const accounts = await window.web3.eth.getAccounts();
-    setAccount(accounts[0]);
+    const accounts = await window?.web3?.eth?.getAccounts();
+    await setAccount(accounts[0]);
     return accounts[0];
   };
 
   //Add Authentication , Add As Doctor
   async function addAuthentication(doctorAddress) {
-    load();
+    await load();
     const account = await getCurrentAccount();
     const addAuth = await new web3.eth.Contract(
       AddMedicalInfoABI,
@@ -74,10 +74,8 @@ const Admin = () => {
 
   //remove Authentication, Remove from post of Doctor.
   async function removeAuthentication(doctorAddress) {
-    load();
+    await load();
     const account = await getCurrentAccount();
-
-    console.log(removeAddressDoctor);
 
     const addAuth = await new web3.eth.Contract(
       AddMedicalInfoABI,
@@ -88,7 +86,7 @@ const Admin = () => {
       getContractAddress
     );
     const resultAdd = await addAuth.methods
-      .removeAuthorisedDoctor(removeAddressDoctor)
+      .removeAuthorisedDoctor(doctorAddress)
       .send(
         {
           from: account,
@@ -101,7 +99,7 @@ const Admin = () => {
       );
 
     const resultGet = await getAuth.methods
-      .removeAuthorisedDoctor(removeAddressDoctor)
+      .removeAuthorisedDoctor(doctorAddress)
       .send(
         {
           from: account,

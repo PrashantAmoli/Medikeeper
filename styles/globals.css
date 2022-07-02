@@ -304,6 +304,36 @@ textarea {
   background: rgba(0, 0, 0, 0.01);
 }
 
+/* input[type='file'] { */
+input[name='report'] {
+  color: var(--font);
+  background: transparent;
+  display: inline-block;
+  width: 100%;
+  padding: 96px 0 0 0;
+  height: 121px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: url(https://cdn0.iconfinder.com/data/icons/files-documents-12/128/file_1_pdf_document_upload-09-512.png)
+    top center no-repeat #e4e4e400;
+  border-radius: 20px;
+  background-size: 95px 100px;
+  cursor: context-menu;
+  text-align: center;
+}
+
+input[name='report']::before {
+  display: inline-block;
+  color: var(--font);
+}
+input[name='report']::-webkit-file-upload-button {
+  width: 3rem;
+  visibility: hidden;
+  color: var(--font);
+  background: var(--bg);
+  box-shadow: 0 0 5px 1px #aaa;
+}
+
 button {
   width: fit-content;
   border-radius: 30px;
