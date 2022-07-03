@@ -7,6 +7,7 @@ import Modal from '../cards/Modal';
 
 export default function Metamask() {
   const [showModal, setShowModal] = useState(false);
+  const [Message, setMessage] = useState(``);
   const [Address, setAddress] = useState('');
   const [URL, setURL] = useState(
     'https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif'
@@ -42,6 +43,7 @@ export default function Metamask() {
     const loader = await load();
 
     if (loader == false) {
+      setMessage(`Please Install Metamask`);
       setShowModal(true);
       return false;
     }
@@ -60,6 +62,8 @@ export default function Metamask() {
   };
 
   const removeSession = () => {
+    setMessage(`Also Disonnect from Metamask extension/app`);
+    setShowModal(true);
     removeItem('address');
     setAddress(null);
   };
@@ -104,7 +108,7 @@ export default function Metamask() {
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
             <div className={styles.form} style={{ boxShadow: 'none' }}>
-              <h3 className={styles.head}>Please Install Metamask!</h3>
+              <h4 className={styles.head}>{Message}</h4>
               <div className={styles.head}>
                 <Image
                   loader={myLoader}
@@ -115,9 +119,6 @@ export default function Metamask() {
                 />
               </div>
             </div>
-            <span>
-              Read the 'Directions of Use' from the Homepage to know more.
-            </span>
           </Modal>
         )}
       </section>
