@@ -62,7 +62,7 @@ export default function Metamask() {
   };
 
   const removeSession = () => {
-    setMessage(`Also Disonnect from Metamask extension/app`);
+    setMessage(`Also Disconnect your Account from Metamask extension/app`);
     setShowModal(true);
     removeItem('address');
     setAddress(null);

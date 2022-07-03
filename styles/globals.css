@@ -217,6 +217,7 @@ img:hover {
     top: 12px;
     right: 15px;
     font-size: 1.7rem;
+    text-shadow: 0 0 1px var(--font);
   }
 
   .navbar-container input[type='checkbox']:checked ~ .menu-items {
