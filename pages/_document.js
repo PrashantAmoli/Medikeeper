@@ -10,6 +10,12 @@ class MainDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta name="application-name" content="Medikeeper" />
+          <meta
+            name="description"
+            content="Medikeeper is blockchain-based application for storing, accessing, and managing medical records securely."
+          />
+          <meta name="mobile-web-app-capable" content="yes" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link
             rel="apple-touch-icon"
@@ -28,6 +34,9 @@ class MainDocument extends Document {
             sizes="16x16"
             href="/favicon-16x16.png"
           />
+
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <link rel="manifest" href="/manifest.json" />
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
         <body>
