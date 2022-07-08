@@ -20,10 +20,8 @@ const Footer = () => {
         </span>
         <small>
           &copy; Copyright 2022
-          <Link href={link} target="_blank">
+          <Link href={`https://PrashantAmoli.github.io`} target="_blank">
             <a
-              href={`https://PrashantAmoli.github.io`}
-              target="_blank"
               style={{ textDecoration: 'none', color: 'var(--color)' }}
             >
               &emsp; Prashant Amoli
