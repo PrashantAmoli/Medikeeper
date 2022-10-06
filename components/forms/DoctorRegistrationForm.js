@@ -32,6 +32,16 @@ export default function RegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    msg = `Processing Request: Please wait`;
+    await setMessage(msg);
+    await setShowModal(true);
+    setTimeout(() => {
+      msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+      setShowModal(false);
+      setMessage(msg);
+    }, 5000);
+
+
     let valid = true;
     let msg = 'Invalid Input: Please enter valid input values ⁉️  ';
     let data = { ...Data };
@@ -157,7 +167,7 @@ export default function RegistrationForm() {
                 src="https://www.samrattechnologies.com/assets/images/wallpaper/processing.gif"
                 alt="Report"
                 width={300}
-                height={100}
+                height={150}
               />
             </div>
             {Message}

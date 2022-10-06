@@ -217,6 +217,7 @@ img:hover {
     top: 12px;
     right: 15px;
     font-size: 1.7rem;
+    text-shadow: 0 0 1px var(--font);
   }
 
   .navbar-container input[type='checkbox']:checked ~ .menu-items {
@@ -302,6 +303,41 @@ textarea {
   padding: 3px 8px;
   margin: 1rem 1rem 2.5rem 1rem;
   background: rgba(0, 0, 0, 0.01);
+}
+
+/* input[type='file'] { */
+input[name='report'] {
+  color: var(--font);
+  background: transparent;
+  display: inline-block;
+  width: 100%;
+  padding: 96px 5px 5px 5px;
+  height: 121px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: url(https://cdn0.iconfinder.com/data/icons/files-documents-12/128/file_1_pdf_document_upload-09-512.png)
+    top center no-repeat #e4e4e40a;
+  border-radius: 20px;
+  background-size: 95px 100px;
+  cursor: context-menu;
+  text-align: center;
+  align-content: center;
+}
+
+input[name='report']::before {
+  display: inline-block;
+  color: var(--font);
+  text-align: center;
+  align-content: center;
+}
+input[name='report']::-webkit-file-upload-button {
+  max-width: 30%;
+  visibility: hidden;
+  /* display: none; */
+  color: var(--font);
+  background: var(--bg);
+  box-shadow: 0 0 5px 1px #aaa;
+  font-weight: bold;
 }
 
 button {

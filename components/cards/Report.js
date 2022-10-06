@@ -7,7 +7,8 @@ const Report = ({ Data }) => {
 
   useEffect(() => {
     let reports = Data.pdfAll.split(', ');
-    // reports = reports.shift();
+    reports = reports.reverse();
+    reports.shift();
     setReports(reports);
   }, [Data]);
 
@@ -20,11 +21,11 @@ const Report = ({ Data }) => {
       <div className={styles.card}>
         <h2 className={styles.head}>Report</h2>
         <br />
-        <h3>Patient's ID: &nbsp;{Data.patientsID}</h3>
-        <h3>Doctor's ID: &ensp;{Data.updatedBy}</h3>
-        <h3>Updated on: &ensp;{Data.lastUpdated}</h3>
-        <h3>Diagnosis: &emsp; {Data.diagnosis}</h3>
-        <h3>Prescription: {Data.currentMedicalDosage}</h3>
+        <h3>Patient's ID: &ensp; {Data.patientsID}</h3>
+        <h3>Doctor's ID: &ensp; {Data.updatedBy}</h3>
+        <h3>Updated on: &ensp; {Data.lastUpdated}</h3>
+        <h3>Diagnosis: &emsp;&ensp;{Data.diagnosis}</h3>
+        <h3>Prescription:&ensp;{Data.currentMedicalDosage}</h3>
         <h3>
           Report File: &ensp;
           {Data.pdf != '' &&
@@ -38,14 +39,14 @@ const Report = ({ Data }) => {
                   height={'400px'}
                   type="application/pdf"
                 />
+                <span>
+                  <Link href={Data.pdf} target="_blank">
+                    <a href={Data.pdf} target="_blank">
+                      Open Full Report in New Tab💻📄
+                    </a>
+                  </Link>
+                </span>
               </div>
-              <span>
-                <Link href={Data.pdf} target="_blank">
-                  <a href={Data.pdf} target="_blank">
-                    Open Full Report in new tab
-                  </a>
-                </Link>
-              </span>
             </>
           ) : (
             <></>
@@ -63,14 +64,14 @@ const Report = ({ Data }) => {
                   <embed
                     src={`${report}`}
                     width={'100%'}
-                    height={'400px'}
+                    height={'300px'}
                     type="application/pdf"
                   />
                 </div>
                 <span className={styles.head}>
                   <Link href={report} target="_blank">
                     <a href={report} target="_blank">
-                      Open Full Report in new tab
+                      Open Full Report in New Tab💻📄
                     </a>
                   </Link>
                 </span>

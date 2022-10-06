@@ -30,6 +30,16 @@ export default function PatientForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    msg = `Processing Request: Please wait`;
+    await setMessage(msg);
+    await setShowModal(true);
+    setTimeout(() => {
+      msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+      setShowModal(false);
+      setMessage(msg);
+    }, 5000);
+
 
     let valid = true;
     let msg = 'Invalid Input: Please enter valid input values ⁉️  ';
@@ -81,7 +91,13 @@ export default function PatientForm() {
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input type="text" placeholder="Patient ID" ref={IDRef} required />
+        <input
+          type="text"
+          placeholder="Patient ID"
+          ref={IDRef}
+          style={{ textAlign: 'center' }}
+          required
+        />
         <button className={styles.btn} type="submit">
           Submit
         </button>

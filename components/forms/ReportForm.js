@@ -2,8 +2,10 @@ import { useRef, useState } from 'react';
 import { validateID, validateName, validateFile } from './validations.js';
 import styles from '../../styles/Forms.module.css';
 import AddData from '../scripts/AddData.js';
+import GetData from '../scripts/GetData.js';
 import Modal from '../cards/Modal';
 import useStorage from '../hooks/useStorage';
+import Image from 'next/image';
 
 export default function ReportForm() {
   const [showModal, setShowModal] = useState(false);
@@ -28,22 +30,36 @@ export default function ReportForm() {
   const fileRef = useRef();
 
   const { addRecord } = AddData();
+  const { getPatient, getDoctor } = GetData();
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    msg = `Processing Request: Please wait`;
+    await setMessage(msg);
+    await setShowModal(true);
+    setTimeout(() => {
+      msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+      setShowModal(false);
+      setMessage(msg);
+    }, 5000);
 
     let valid = true;
     let msg = 'Invalid Input: Please enter valid input values ⁉️  ';
     let data = { ...Data };
 
     if (validateID(patientsIDRef.current.value.trim()))
-      data.patientsID = patientsIDRef.current.value;
+      data.patientsID = patientsIDRef.current.value.trim();
     else {
       valid = false;
       msg = msg + "   Invalid Patient's ID   |";
     }
     if (validateID(doctorsIDRef.current.value.trim()))
-      data.updatedBy = doctorsIDRef.current.value;
+      data.updatedBy = doctorsIDRef.current.value.trim();
     else {
       valid = false;
       msg = msg + "   Invalid Doctor's ID  |";
@@ -73,6 +89,32 @@ export default function ReportForm() {
       msg = msg + '   Invalid Date  |';
     }
 
+    const checkDoctor = await getDoctor(data.updatedBy);
+    if (checkDoctor[0].length < 3) {
+      msg = `No Doctor exists with ID: ${data.updatedBy}⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      setTimeout(() => {
+        msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+        setShowModal(false);
+        setMessage(msg);
+      }, 4000);
+      return false;
+    }
+
+    const checkPatient = await getPatient(data.patientsID);
+    if (checkPatient[0].length < 3) {
+      msg = `No Patient exists with ID: ${data.patientsID}⁉️`;
+      await setMessage(msg);
+      await setShowModal(true);
+      setTimeout(() => {
+        msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+        setShowModal(false);
+        setMessage(msg);
+      }, 4000);
+      return false;
+    }
+
     const file = fileRef.current.value;
     if (!validateFile(file)) {
       msg = msg + '   Invalid file  |';
@@ -81,12 +123,6 @@ export default function ReportForm() {
       data.pdf = `https://dweb.link/ipfs/${cid}`;
     }
 
-    if (data.pdf == `https://dweb.link/ipfs/`) {
-      msg = "    PDF Report didn't get uploaded to IPFS: Please try again    |";
-      await setMessage(msg);
-      await setShowModal(true);
-      return;
-    }
     await setData(data);
 
     if (valid == false) {
@@ -98,6 +134,19 @@ export default function ReportForm() {
       Please wait...`;
       await setMessage(msg);
       await setShowModal(true);
+    }
+
+    if (data.pdf == `https://dweb.link/ipfs/`) {
+      msg = "    PDF Report didn't get uploaded to IPFS: Please try again    |";
+      await setMessage(msg);
+      await setShowModal(true);
+
+      setTimeout(() => {
+        msg = 'Invalid Input: Please enter valid input values ⁉️  ';
+        setShowModal(false);
+        setMessage(msg);
+      }, 4000);
+      return false;
     }
 
     await addRecord(data);
@@ -170,6 +219,15 @@ export default function ReportForm() {
         {/* <button onClick={() => setShowModal(true)}>Open Modal</button> */}
         {showModal && (
           <Modal onClose={() => setShowModal(false)} show={showModal}>
+            <div className={styles.form} style={{ boxShadow: 'none' }}>
+              <Image
+                loader={myLoader}
+                src="https://www.samrattechnologies.com/assets/images/wallpaper/processing.gif"
+                alt="Report"
+                width={300}
+                height={150}
+              />
+            </div>
             {Message}
           </Modal>
         )}
