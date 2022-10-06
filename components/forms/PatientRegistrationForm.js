@@ -17,6 +17,7 @@ export default function PatientRegistrationForm() {
     allergies: '',
     gender: '',
     dob: '',
+    walletAddress: '',
   });
 
   const patientsIDRef = useRef();
@@ -24,6 +25,7 @@ export default function PatientRegistrationForm() {
   const addressRef = useRef();
   const allergiesRef = useRef();
   const dobRef = useRef();
+  const walletAddressRef = useRef();
 
   const myLoader = ({ src, width, quality }) => {
     return `${src}`;
@@ -34,7 +36,7 @@ export default function PatientRegistrationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     msg = `Processing Request: Please wait`;
     await setMessage(msg);
     await setShowModal(true);
@@ -43,7 +45,6 @@ export default function PatientRegistrationForm() {
       setShowModal(false);
       setMessage(msg);
     }, 5000);
-
 
     let valid = true;
     let msg = 'Invalid Input: Please enter valid input values ⁉️  ';
@@ -104,6 +105,12 @@ export default function PatientRegistrationForm() {
     data.gender = gender;
     await setData(data);
 
+    data.walletAddress = walletAddressRef.current.value;
+    if (data.walletAddress == '' || data.walletAddress.size == 42) {
+      valid = false;
+      msg = msg + "  Invalid Patient's Wallet Address,  ";
+    }
+
     if (valid == false) {
       await setMessage(msg);
       await setShowModal(true);
@@ -136,6 +143,7 @@ export default function PatientRegistrationForm() {
           className="patient-name"
           placeholder="Patient's Name"
           ref={patientsNameRef}
+          required
         />
         <input
           type="tel"
@@ -143,6 +151,15 @@ export default function PatientRegistrationForm() {
           className="phone-number"
           placeholder="Phone Number"
           ref={patientsIDRef}
+          required
+        />
+        <input
+          type="text"
+          name="walletAddress"
+          className="walletAddress"
+          placeholder="Wallet Address: 0x087298b2F76741E2D30566A7f5138D6896aBf108"
+          ref={walletAddressRef}
+          required
         />
         <div className={styles.rowForm}>
           <label htmlFor="dob">Date of Birth:</label>

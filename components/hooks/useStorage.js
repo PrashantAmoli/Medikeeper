@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { Web3Storage } from 'web3.storage';
 
-const API_TOKEN =
-  process.env.API_TOKEN ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQ5RDY2MUNkRjQwZWRiNTdCYzJEZTlGRTg3YTVCZjk3NmZhQzQ4YzEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NDgyNzQ2MDg4NzEsIm5hbWUiOiJEb2N0b3IifQ.lLx1al8hirsVcjTg9D-_LrWr2Fxjw_h-L5HvtihXdJs';
+const API_TOKEN = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQ5RDY2MUNkRjQwZWRiNTdCYzJEZTlGRTg3YTVCZjk3NmZhQzQ4YzEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjUwNTgyMzUwMTYsIm5hbWUiOiJQaGFzZTIifQ.wrki6uYrMlBpuvqEUj7cTe_9MtnPwe-1EohDzZBOUkU`;
 
 const useStorage = () => {
   const [CID, setCID] = useState('');
@@ -27,6 +25,7 @@ const useStorage = () => {
     for (const file of files) {
       console.log(`${file.cid} ${file.name} ${file.size}`);
       await setCID(file.cid);
+      return file.cid;
       // alert(`${file.cid} ${file.name} ${file.size}`);
     }
     return CID;

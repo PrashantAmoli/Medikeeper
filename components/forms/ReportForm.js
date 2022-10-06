@@ -137,7 +137,7 @@ export default function ReportForm() {
     }
 
     if (data.pdf == `https://dweb.link/ipfs/`) {
-      msg = "    PDF Report didn't get uploaded to IPFS: Please try again    |";
+      msg = `    PDF Report didn't get uploaded to IPFS: Please try again.  ${data.pdf}  |`;
       await setMessage(msg);
       await setShowModal(true);
 
