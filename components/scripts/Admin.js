@@ -52,6 +52,7 @@ const Admin = () => {
           if (resultAdd) console.log(resultAdd);
         }
       );
+  }
 
   //remove Authentication, Remove from post of Doctor.
   async function removeAuthentication(removeAddressDoctor) {
