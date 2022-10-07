@@ -1,9 +1,9 @@
 import Web3 from 'web3';
-import AddMedicalInfo from '../ABIs/AddMedicalInfo.json';
+import AddMedicalInfo from '../ABIs/MedicalInfoAddGet.json';
 import { useState, useEffect } from 'react';
 
 const AddMedicalInfoABI = AddMedicalInfo.abi;
-const contractAddress = '0xB179ab9d325DFc545CfB69fC136Ef395f60482cb'; // Goerli
+const contractAddress = '0x9dC0c0Bc3c011a2b485c43b2B0394011193A3415'; // Goerli
 // const contractAddress = '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707'; // localhost
 
 const AddData = () => {
@@ -33,6 +33,8 @@ const AddData = () => {
       contractAddress
     );
 
+    console.log(JSON.stringify(Doctor));
+
     const result = await contract.methods
       .addMedicalInfoDoctor(
         Doctor.doctorsName,
@@ -46,11 +48,14 @@ const AddData = () => {
           from: account,
         },
         (err, result) => {
-          if (err) console.log(err);
-          else if (result) console.log(result);
+          if (err) {
+            //show modal here displaying the error that was given by the EVM compiler
+            alert('Not Authorised! Sorry, Become a doctor!!');
+            console.log(err);
+          } else if (result) console.log(result, JSON.stringify(result));
         }
       );
-    return result;
+    console.log('Result', JSON.stringify(result));
   };
 
   const addPatient = async (Patient) => {
@@ -62,6 +67,8 @@ const AddData = () => {
       contractAddress
     );
 
+    console.log(JSON.stringify(Patient));
+
     const result = await contract.methods
       .addMedicalInfoPatient(
         Patient.patientsName,
@@ -70,18 +77,22 @@ const AddData = () => {
         Patient.gender,
         Patient.address,
         Patient.dob,
-        Patient.allergies
+        Patient.allergies,
+        Patient.walletAddress //this one is new
       )
       .send(
         {
           from: account,
         },
         (err, result) => {
-          if (err) console.log(err);
-          else if (result) console.log(result);
+          if (err) {
+            //show modal here displaying the error that was given by the EVM compiler
+            alert('Not Authorised! Sorry, Become a doctor!!');
+            console.log(err);
+          } else if (result) console.log(result, JSON.stringify(result));
         }
       );
-    return result;
+    console.log('Result', JSON.stringify(result));
   };
 
   const addRecord = async (Report) => {
@@ -92,6 +103,8 @@ const AddData = () => {
       AddMedicalInfoABI,
       contractAddress
     );
+
+    console.log(JSON.stringify(Report));
 
     const result = await contract.methods
       .addMedicalRecords(
@@ -107,11 +120,16 @@ const AddData = () => {
           from: account,
         },
         (err, result) => {
-          if (err) console.log(err);
-          else if (result) console.log(result);
+          if (err) {
+            //show modal here displaying the error that was given by the EVM compiler
+            alert(
+              'Not Authorised! Sorry, Become a doctor to access patients records!!'
+            );
+            console.log(err);
+          } else if (result) console.log(result, JSON.stringify(result));
         }
       );
-    return result;
+    console.log('Result', JSON.stringify(result));
   };
 
   return { Account, addDoctor, addPatient, addRecord };

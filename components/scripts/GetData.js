@@ -1,10 +1,10 @@
 import Web3 from 'web3';
-import GetMedicalInfo from '../ABIs/GetMedicalInfo.json';
+import GetMedicalInfo from '../ABIs/MedicalInfoAddGet.json';
 import { useState, useEffect } from 'react';
 
 const GetMedicalInfoABI = GetMedicalInfo.abi;
 // const contractAddress = '0x0165878A594ca255338adfa4d48449f69242Eb8F'; // localhost
-const contractAddress = '0x19b1970917E1Ec7D627924B65aaD0F4eac3BaD3b'; // Goerli
+const contractAddress = '0x9dC0c0Bc3c011a2b485c43b2B0394011193A3415'; // Goerli
 
 const GetData = () => {
   const [Account, setAccount] = useState('');
@@ -13,21 +13,15 @@ const GetData = () => {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
       window.ethereum.enable();
-      return true;
-    } else {
-      return false;
     }
   };
   const load = async () => {
-    const loaded = await loadWeb3();
-    return loaded;
+    await loadWeb3();
   };
   const getCurrentAccount = async () => {
-    const accounts = await window?.web3?.eth?.getAccounts();
-    if (accounts[0] != undefined) {
-      setAccount(accounts[0]);
-      return accounts[0];
-    }
+    const accounts = await window.web3.eth.getAccounts();
+    setAccount(accounts[0]);
+    return accounts[0];
   };
 
   const getDoctor = async (ID) => {
@@ -44,8 +38,11 @@ const GetData = () => {
         from: account,
       },
       (err, result) => {
-        if (err) console.log(err);
-        if (result) {
+        if (err) {
+          //show modal here displaying the error that was given by the EVM compiler
+          // alert('Not Authorised! Sorry, Become a doctor!!');
+          console.log(err);
+        } else if (result) {
           console.log(
             'GetData Result: ',
             result[0],
@@ -56,6 +53,7 @@ const GetData = () => {
         }
       }
     );
+    console.log(JSON.stringify(result), result);
     // name, speciality, hospital, gender
     return result;
   };
@@ -76,8 +74,11 @@ const GetData = () => {
           from: account,
         },
         (err, result) => {
-          if (err) console.log(err);
-          if (result) {
+          if (err) {
+            //show modal here displaying the error that was given by the EVM compiler
+            alert('Not Authorised! Sorry, Become a doctor!!');
+            console.log(err);
+          } else if (result) {
             console.log(
               'GetData Result: ',
               result[0],
@@ -90,6 +91,8 @@ const GetData = () => {
           }
         }
       );
+    console.log(JSON.stringify(result), result);
+    //name , number, gender, address,dob,allergies
     return result;
   };
 
@@ -107,8 +110,11 @@ const GetData = () => {
         from: account,
       },
       (err, result) => {
-        if (err) console.log(err);
-        if (result) {
+        if (err) {
+          //show modal here displaying the error that was given by the EVM compiler
+          // alert('Not Authorised! Sorry, Become a doctor!!');
+          console.log(err);
+        } else if (result) {
           console.log(
             'GetData Result: ',
             result[0],
@@ -122,6 +128,7 @@ const GetData = () => {
       }
     );
     // lastUpdated, medicalDosage, UpdatedBy, diagnosis, PDF, allPDF
+    console.log(JSON.stringify(result), result);
     return result;
   };
 
