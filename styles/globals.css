@@ -82,7 +82,8 @@ img:hover {
   z-index: 100;
   /* background-image: url('https://thumbs.gfycat.com/MindlessHarshAfricanhornbill-max-1mb.gif'); */
   /* background-image: url('https://i.pinimg.com/originals/66/53/31/6653318bb022e7ca9339775eebd6987b.gif'); */
-  background-image: url('http://24.media.tumblr.com/d423eb21f1e477fa355326299a4408fd/tumblr_mstilrbN8P1s5jjtzo1_500.gif');
+  /* background-image: url('http://24.media.tumblr.com/d423eb21f1e477fa355326299a4408fd/tumblr_mstilrbN8P1s5jjtzo1_500.gif'); */
+  backdrop-filter: blur(6px);
   background-position: bottom;
   background-repeat: repeat-x;
   background-size: contain;
@@ -125,7 +126,8 @@ img:hover {
 
 @media (max-width: 768px) {
   .navbar {
-    opacity: 0.77;
+    opacity: 0.9;
+    backdrop-filter: blur(6px);
   }
 
   .navbar-container input[type='checkbox'],
@@ -199,7 +201,8 @@ img:hover {
     transition: transform 0.5s ease-in-out;
     box-shadow: 5px 0px 10px 0px #aaa;
     overflow: auto;
-    background-image: url('http://24.media.tumblr.com/d423eb21f1e477fa355326299a4408fd/tumblr_mstilrbN8P1s5jjtzo1_500.gif');
+    /* background-image: url('http://24.media.tumblr.com/d423eb21f1e477fa355326299a4408fd/tumblr_mstilrbN8P1s5jjtzo1_500.gif'); */
+    backdrop-filter: blur(24px);
     background-position: center;
     background-repeat: repeat-y;
     background-size: cover;

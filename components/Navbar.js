@@ -76,6 +76,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
+              <Link href="/AdminPanel">
+                <a>Admin</a>
+              </Link>
+            </li>
+            <li>
               {/* <a alt="Change Theme" onClick={() => changeTheme()}>
               Theme
             </a> */}
