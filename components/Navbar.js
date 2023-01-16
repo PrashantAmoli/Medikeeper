@@ -76,7 +76,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/Register">
+              <Link href="/AdminPanel">
                 <a>Admin</a>
               </Link>
             </li>

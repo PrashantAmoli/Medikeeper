@@ -5,9 +5,49 @@ import Footer from '../components/cards/Footer.js';
 import Metamask from '../components/scripts/Metamask.js';
 import Navbar from '../components/Navbar.js';
 import { useState, useCallback } from 'react';
-import { TagCloud } from '@frank-mayer/react-tag-cloud';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
+
+export default function Home() {
+  const [showModal, setShowModal] = useState(false);
+
+  const particlesInit = useCallback(async (engine) => {
+    console.log(engine);
+    // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
+    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+    // starting from v2 you can add only the features you need reducing the bundle size
+    await loadFull(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async (container) => {
+    await console.log(container);
+  }, []);
+
+  return (
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
+
+      <Navbar />
+
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        options={OPTIONS_SNOW}
+      />
+
+      <div className={styles.container}>
+        <Welcome />
+      </div>
+
+      <Metamask />
+
+      <Footer />
+    </>
+  );
+}
 
 const OPTIONS_SNOW = {
   autoPlay: true,
@@ -578,82 +618,3 @@ const OPTIONS_SNOW = {
     },
   },
 };
-
-export default function Home() {
-  const [showModal, setShowModal] = useState(false);
-
-  const particlesInit = useCallback(async (engine) => {
-    console.log(engine);
-    // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(engine);
-  }, []);
-
-  const particlesLoaded = useCallback(async (container) => {
-    await console.log(container);
-  }, []);
-
-  return (
-    <>
-      <Head>
-        <title>Home</title>
-      </Head>
-
-      <Navbar />
-
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        options={OPTIONS_SNOW}
-      />
-      {/* options={PARTICLES_OPTIONS} */}
-
-      <div className={styles.container}>
-        {/* <TagCloud
-          options={(w) => ({
-            radius: Math.min(500, w.innerWidth, w.innerHeight) / 2,
-            maxSpeed: 'fast',
-          })}
-          onClick={(tag, ev) => alert(tag)}
-          onClickOptions={{ passive: true }}
-        >
-          {[
-            'VSCode',
-            'TypeScript',
-            'React',
-            'Preact',
-            'Parcel',
-            'Jest',
-            'Next',
-            'ESLint',
-            'Framer Motion',
-            'Three.js',
-            'Preact',
-            'Parcel',
-            'Parcel',
-            'Jest',
-            'Next',
-            'ESLint',
-            'Framer Motion',
-            'Three.js',
-            'Preact',
-            'Parcel',
-            'Jest',
-            'Next',
-            'ESLint',
-            'Framer Motion',
-            'Three.js',
-          ]}
-        </TagCloud> */}
-
-        <Welcome />
-      </div>
-
-      <Metamask />
-
-      <Footer />
-    </>
-  );
-}
