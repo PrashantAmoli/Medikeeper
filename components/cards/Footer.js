@@ -5,34 +5,20 @@ const Footer = () => {
   return (
     <>
       <footer className={styles.footer}>
-        <span className={styles.head}>
-          Medikeeper DApp developed by on
-          <Link href={`https://stackblitz.com/edit/medikeeper`} target="_blank">
-            <a
-              href={`https://stackblitz.com/edit/medikeeper`}
-              target="_blank"
-              style={{ textDecoration: 'none', color: 'var(--color)' }}
-            >
-              &ensp;Stackblitz
-            </a>
-          </Link>{' '}
-          and deployed on Vercel and Goerli Network.
-        </span>
+        {/* <span className={styles.head}>
+          Medikeeper DApp deployed on Goerli Network.
+        </span> */}
         <small>
-          &copy; Copyright 2022
+          &copy; Copyright 2023
           <Link href={`https://PrashantAmoli.github.io`} target="_blank">
-            <a
-              style={{ textDecoration: 'none', color: 'var(--color)' }}
-            >
-              &emsp; Prashant Amoli
+            <a style={{ textDecoration: 'none', color: 'var(--color)' }}>
+              &ensp; Prashant Amoli
             </a>
           </Link>{' '}
           <Link href={`/AdminPanel`}>
-            <a
-              style={{ textDecoration: 'none', color: 'var(--color)' }}
-            >
+            <a style={{ textDecoration: 'none', color: 'var(--color)' }}>
               {' '}
-              &emsp; All Rights Reserved &emsp;
+              &ensp; All Rights Reserved
             </a>
           </Link>
         </small>

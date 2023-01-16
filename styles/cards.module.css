@@ -5,7 +5,7 @@
   justify-content: center;
   width: 95%;
   max-width: 750px;
-  border-radius: 1rem;
+  border-radius: 2rem;
   box-shadow: 0px 1px 14px 1px #aaa;
   margin: 1rem auto;
   padding: 2rem 2rem;
@@ -17,6 +17,8 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-blend-mode: darken;
+  background-origin: content-box;
+  backdrop-filter: blur(2px);
 }
 
 .row {

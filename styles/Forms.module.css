@@ -18,6 +18,7 @@
   background-repeat: repeat-y;
   background-size: contain;
   background-blend-mode: darken;
+  backdrop-filter: blur(2px);
 }
 
 .rowForm {
